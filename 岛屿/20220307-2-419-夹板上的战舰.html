@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>夹板上的战舰</title>
+  </head>
+  <body>
+    <script>
+      var countBattleships = function (board) {
+        let count = 0,
+          rowLength = board.length,
+          columnLength = board[0].length;
+        function dfs(row, column) {
+          if (
+            row < 0 ||
+            row >= rowLength ||
+            column < 0 ||
+            column >= columnLength ||
+            board[row][column] == "."
+          ) {
+            return;
+          }
+
+          board[row][column] = ".";
+
+          dfs(row - 1, column);
+          dfs(row + 1, column);
+          dfs(row, column - 1);
+          dfs(row, column + 1);
+        }
+
+        for (let i = 0; i < rowLength; i++) {
+          for (let j = 0; j < columnLength; j++) {
+            if (board[i][j] == "X") {
+              count++;
+              dfs(i, j);
+            }
+          }
+        }
+        console.log(count);
+        return count;
+      };
+      let board = [
+        ["X", ".", ".", "X"],
+        [".", ".", ".", "X"],
+        [".", ".", ".", "X"],
+      ];
+      countBattleships(board);
+    </script>
+  </body>
+</html>

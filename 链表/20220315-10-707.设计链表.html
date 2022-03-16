@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next) {
+          this.val = val;
+          this.next = next;
+        }
+      }
+      var MyLinkedList = function () {
+        this.size = 0;
+        this.head = null;
+        this.tail = null;
+      };
+      MyLinkedList.prototype.getNode = function (index) {
+        if (index < 0 || index >= this.size) return null;
+
+        let dummy = this.head;
+        while (--index >= 0) {
+          dummy = dummy.next;
+        }
+        return dummy;
+      };
+      MyLinkedList.prototype.get = function (index) {
+        if (index < 0 || index >= this.size) return -1;
+        return this.getNode(index).val;
+      };
+
+      MyLinkedList.prototype.addAtHead = function (val) {
+        let node = new ListNode(val);
+        node.next = this.head;
+        this.head = node;
+        this.size++;
+      };
+      MyLinkedList.prototype.addAtTail = function (val) {
+        let node = new ListNode(val, null);
+        let dummy = new ListNode();
+        let res = dummy;
+        dummy.next = this.head;
+        while (dummy.next !== null) {
+          dummy = dummy.next;
+        }
+        dummy.next = node;
+        this.head = res.next;
+        this.size++;
+      };
+
+      MyLinkedList.prototype.addAtIndex = function (index, val) {
+        if (index > this.size) {
+          return;
+        }
+        if (index <= 0) {
+          this.addAtHead(val);
+          return;
+        }
+        if (index === this.size) {
+          this.addAtTail(val);
+          return;
+        }
+        const node = this.getNode(index - 1);
+        node.next = new ListNode(val, node.next);
+        this.size++;
+      };
+
+      MyLinkedList.prototype.deleteAtIndex = function (index) {
+        if (index < 0 || index >= this.size) return;
+        let dummy = new ListNode();
+        dummy.next = this.head;
+        let res = dummy;
+        while (index-- > 0) {
+          dummy = dummy.next;
+        }
+        dummy.next = dummy.next.next;
+        this.head = res.next;
+        this.size--;
+      };
+
+      MyLinkedList.prototype.search = function (val) {
+        let dummy = this.head;
+        while (dummy) {
+          if (dummy.val === val) return dummy;
+          dummy = dummy.next;
+        }
+        return null;
+      };
+
+      let list = new MyLinkedList();
+      list.addAtHead(3);
+      list.addAtHead(2);
+      list.addAtHead(1);
+      list.search(3).next = list.search(2);
+
+      console.log(list);
+      // let list = new MyLinkedList();
+      // list.addAtHead(1);
+      // list.addAtTail(3);
+      // list.addAtIndex(1, 2);
+      // list.get(1);
+      // list.deleteAtIndex(1);
+      // list.get(1);
+
+      // let list = new MyLinkedList();
+      // list.addAtIndex(0, 10);
+      // list.addAtIndex(0, 20);
+      // list.addAtIndex(1, 30);
+      // const a = list.get(0);
+      // console.log(a);
+
+      // let list = new MyLinkedList();
+      // list.addAtHead(1);
+      // list.addAtTail(3);
+      // list.addAtIndex(1, 2);
+      // const a = list.get(1);
+      // list.deleteAtIndex(0);
+      // const b = list.get(0);
+      // console.log(b);
+
+      // let list = new MyLinkedList();
+      // list.addAtHead(1);
+      // list.addAtTail(3);
+      // list.addAtIndex(1, 2);
+      // const a = list.get(1);
+      // console.log(a);
+      // list.deleteAtIndex(1);
+      // const b = list.get(1);
+      // console.log(b);
+
+      // let list = new MyLinkedList();
+      // list.addAtHead(1);
+      // list.deleteAtIndex(0);
+      // console.log(list.head);
+    </script>
+  </body>
+</html>

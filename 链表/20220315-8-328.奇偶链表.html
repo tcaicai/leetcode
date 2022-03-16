@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function LinkedList() {
+        var Node = function (element) {
+          this.val = element;
+          this.next = null;
+        };
+        var head = null,
+          length = 0;
+        this.append = function (element) {
+          var node = new Node(element),
+            current;
+          if (head === null) {
+            head = node;
+          } else {
+            current = head;
+            while (current.next) {
+              current = current.next;
+            }
+            current.next = node;
+          }
+          length++;
+        };
+        this.getHead = function () {
+          return head;
+        };
+        this.search = function (element) {
+          var current = head;
+          while (current) {
+            if (current.val === element) {
+              return current;
+            }
+            current = current.next;
+          }
+          return null;
+        };
+      }
+      let list = new LinkedList();
+      list.append("1");
+      list.append("2");
+      list.append("3");
+      list.append("4");
+      list.append("5");
+
+      let head = list.getHead();
+
+      // 1 → 2 → 3 → 4 → 5 ------> 1 → 3 → 5 → 2 → 4
+      // 2 → 1 → 3 → 5 → 6 → 4 → 7  ------> 2 → 3 → 6 → 7 → 1 → 5 → 4
+      function oddEvenList(head) {
+        if (head === null || head.next === null) return head;
+        let odd1 = (odd = head),
+          even1 = (even = head.next);
+        while (even !== null && even.next !== null) {
+          if (odd !== null && odd.next !== null) {
+            odd.next = odd.next.next;
+            odd = odd.next;
+          }
+          if (even !== null && even.next !== null) {
+            even.next = even.next.next;
+            even = even.next;
+          }
+        }
+        odd.next = even1;
+        return odd1;
+      }
+      const res = oddEvenList(head);
+      console.log(res);
+    </script>
+  </body>
+</html>

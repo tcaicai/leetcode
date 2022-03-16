@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function LinkedList() {
+        var Node = function (element) {
+          this.val = element;
+          this.next = null;
+        };
+        var head = null,
+          length = 0;
+        this.append = function (element) {
+          var node = new Node(element),
+            current;
+          if (head === null) {
+            head = node;
+          } else {
+            current = head;
+            while (current.next) {
+              current = current.next;
+            }
+            current.next = node;
+          }
+          length++;
+        };
+        this.getHead = function () {
+          return head;
+        };
+        this.search = function (element) {
+          var current = head;
+          while (current) {
+            if (current.val === element) {
+              return current;
+            }
+            current = current.next;
+          }
+          return null;
+        };
+      }
+    </script>
+  </body>
+</html>

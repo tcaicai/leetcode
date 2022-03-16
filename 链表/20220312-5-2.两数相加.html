@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function LinkedList() {
+        var Node = function (element) {
+          this.val = element;
+          this.next = null;
+        };
+        var head = null,
+          length = 0;
+        this.append = function (element) {
+          var node = new Node(element),
+            current;
+          if (head === null) {
+            head = node;
+          } else {
+            current = head;
+            while (current.next) {
+              current = current.next;
+            }
+            current.next = node;
+          }
+          length++;
+        };
+        this.getHead = function () {
+          return head;
+        };
+        this.search = function (element) {
+          var current = head;
+          while (current) {
+            if (current.val === element) {
+              return current;
+            }
+            current = current.next;
+          }
+          return null;
+        };
+      }
+      const list1 = new LinkedList();
+      list1.append("2");
+      list1.append("4");
+      list1.append("3");
+      const l1 = list1.getHead();
+
+      const list2 = new LinkedList();
+      list2.append("5");
+      list2.append("6");
+      list2.append("4");
+      const l2 = list2.getHead();
+      var deleteDuplicates = function (l1, l2) {
+        let node = new ListNode();
+        let add = 0;
+        while (l1.next && l2.next) {
+          let temp = new ListNode();
+          let value = l1.val + l2.val + add;
+          temp.val = value % 10;
+          add = value / 10;
+          node.next = temp;
+          l1 = l1.next;
+          l2 = l2.next;
+        }
+        if (l1) {
+          node.next = l1;
+        }
+        if (l2) {
+          node.next = l2;
+        }
+        return node.next;
+      };
+
+      deleteDuplicates(l1, l2);
+    </script>
+  </body>
+</html>
