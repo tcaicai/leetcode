@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isBalanced = function (root) {
+        const { isBalance } = _isBalanced(root);
+        return isBalance;
+      };
+      function _isBalanced(root) {
+        if (root === null) {
+          return {
+            isBalance: true,
+            height: 0,
+          };
+        }
+
+        let leftInfo = _isBalanced(root.left);
+        let rightInfo = _isBalanced(root.right);
+        let diff = Math.abs(leftInfo.height - rightInfo.height);
+        let height = Math.max(leftInfo.height, rightInfo.height);
+        return {
+          isBalance: leftInfo.isBalance && rightInfo.isBalance && diff <= 1,
+          height: height + 1,
+        };
+      }
+    </script>
+  </body>
+</html>

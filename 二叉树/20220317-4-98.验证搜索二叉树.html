@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isValidBST = function (root) {
+        const { isBST } = _isValidBST(root);
+        return isBST;
+      };
+      function _isValidBST(node) {
+        if (node === null) {
+          return {
+            isBST: true,
+            max: -Infinity,
+            min: Infinity,
+          };
+        }
+        let leftInfo = _isValidBST(node.left);
+        let rightInfo = _isValidBST(node.right);
+
+        let min = node.val,
+          max = node.val;
+
+        min = Math.min(leftInfo.min, min, rightInfo.min);
+        max = Math.max(leftInfo.max, max, rightInfo.max);
+
+        return {
+          isBST:
+            leftInfo.isBST &&
+            rightInfo.isBST &&
+            node.val > leftInfo.max &&
+            node.val < rightInfo.min,
+          max: max,
+          min: min,
+        };
+      }
+    </script>
+  </body>
+</html>
