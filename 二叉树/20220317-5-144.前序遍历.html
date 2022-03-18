@@ -8,6 +8,7 @@
   </head>
   <body>
     <script>
+      // 递归
       var preorderTraversal = function (root) {
         let res = [];
         if (root === null) return res;
@@ -18,6 +19,24 @@
           if (root.right) order(root.right);
         };
         order(root);
+        return res;
+      };
+      // 迭代
+      var preorderTraversal1 = function (root) {
+        let res = [];
+        if (root === null) return res;
+
+        let stack = [];
+        stack.push(root);
+
+        while (stack.length) {
+          let node = stack.pop();
+          res.push(node.val);
+
+          if (node.right) stack.push(node.right);
+          if (node.left) stack.push(ndoe.left);
+        }
+
         return res;
       };
     </script>

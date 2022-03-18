@@ -8,6 +8,7 @@
   </head>
   <body>
     <script>
+      // 递归
       var inorderTraversal = function (root) {
         let res = [];
         if (root === null) return res;
@@ -20,6 +21,29 @@
           if (node.right) order(node.right);
         };
         order(root);
+        return res;
+      };
+      var inorderTraversal1 = function (root) {
+        let res = [];
+        if (root === null) return res;
+        let stack = [];
+
+        while (root) {
+          stack.push(root);
+          root = root.left;
+        }
+        while (stack.length) {
+          let node = stack.pop();
+          res.push(node.val);
+
+          if (node.right) {
+            let node1 = node.right;
+            while (node1) {
+              stack.push(node1);
+              node1 = node1.left;
+            }
+          }
+        }
         return res;
       };
     </script>

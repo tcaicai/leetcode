@@ -8,7 +8,8 @@
   </head>
   <body>
     <script>
-      var inorderTraversal = function (root) {
+      // 递归
+      var postorderTraversal = function (root) {
         let res = [];
         if (root === null) return res;
 
@@ -21,6 +22,45 @@
         };
         order(root);
         return res;
+      };
+      // 迭代
+      var postorderTraversal1 = function (root) {
+        let stack = [root];
+        let res = [];
+        while (stack.length > 0) {
+          // 左右中 中右左
+          let cur = stack.pop();
+          cur.left !== null && stack.push(cur.left);
+          cur.right !== null && stack.push(cur.right);
+          res.push(cur.value);
+        }
+        return res.reverse();
+      };
+      var postorderTraversal2 = function (root) {
+        let res = [];
+        if (root === null) return res;
+        let stack = [];
+        while (root) {
+          stack.push(root.left);
+          root = root.left;
+        }
+        let pre;
+        while (stack.length) {
+          let node = stack[stack.length - 1];
+          if (
+            node.right === null ||
+            (node.right !== null && node.right !== pre)
+          ) {
+            pre = stack.pop();
+            res.push(res.val);
+          } else {
+            let temp2 = node.right;
+            while (temp2) {
+              stack.push(temp2);
+              temp2 = temp2.left;
+            }
+          }
+        }
       };
     </script>
   </body>

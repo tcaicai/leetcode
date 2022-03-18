@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var lowestCommonAncestor = function (root, p, q) {
+        if (root === null) return null;
+        const getLowestCommonAncestor = (node) => {
+          if (node === null)
+            return {
+              findp: false,
+              findq: false,
+              commonAncector: null,
+            };
+
+          let leftInfo = getLowestCommonAncestor(node.left);
+          let rightInfo = getLowestCommonAncestor(node.right);
+
+          let findp = leftInfo.findp || rightInfo.findp || node.val === p.val;
+          let findq = leftInfo.findq || rightInfo.findq || node.val === q.val;
+          let commonAncector =
+            leftInfo.commonAncector || rightInfo.commonAncector || null;
+
+          if (!commonAncector) commonAncector = findp && findq ? node : null;
+
+          return {
+            findp,
+            findq,
+            commonAncector,
+          };
+        };
+        let { commonAncector } = getLowestCommonAncestor(root);
+        return commonAncector;
+      };
+    </script>
+  </body>
+</html>
