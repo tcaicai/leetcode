@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(1);
+      tree.left = new TreeNode(2);
+      tree.right = new TreeNode(3);
+
+      tree.left.left = new TreeNode(4);
+      tree.left.right = new TreeNode(5);
+      tree.right.left = new TreeNode(6);
+      tree.right.right = new TreeNode(7);
+
+      var levelOrder = function (root) {
+        let res = [];
+        if (root === null) return res;
+
+        let queue = [root];
+
+        while (queue.length) {
+          let length = queue.length;
+          res.push([]);
+
+          for (let i = 0; i < length; i++) {
+            let node = queue.shift();
+            res[res.length - 1].push(node.val);
+
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+          }
+        }
+        return res;
+      };
+      const r = levelOrder(tree);
+      console.log(r);
+    </script>
+  </body>
+</html>
