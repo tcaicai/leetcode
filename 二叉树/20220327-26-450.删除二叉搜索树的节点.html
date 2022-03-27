@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(4);
+      tree.left = new TreeNode(2);
+      tree.right = new TreeNode(7);
+
+      tree.right.left = new TreeNode(5);
+      // tree.left.right = new TreeNode(5);
+
+      var deleteNode = function (root, key) {
+        if (root === null) return root;
+
+        if (key === root.val) {
+          if (root.left === null && root.right === null) return null;
+          if (root.left === null) return root.right;
+          if (root.right === null) return root.left;
+          if (root.left !== null && root.right !== null) {
+            let temp = root;
+            let node = root.right;
+            while (node.left) {
+              node = node.left;
+            }
+            node.left = temp.left;
+            return temp.right;
+          }
+        }
+
+        if (key < root.val) root.left = deleteNode(root.left, key);
+        if (key > root.val) root.right = deleteNode(root.right, key);
+        return root;
+      };
+      const r = deleteNode(tree, 4);
+      console.log(r);
+    </script>
+  </body>
+</html>
