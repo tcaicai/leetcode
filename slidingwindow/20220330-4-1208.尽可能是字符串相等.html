@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var equalSubstring = function (s, t, maxCost) {
+        return getMax(s, t, maxCost);
+        // let r = 0,
+        //   l = 0,
+        //   c = 0,
+        //   res = 0;
+
+        // while (r < s.length) {
+        //   c += Math.abs(s[r].charCodeAt() - t[r].charCodeAt());
+        //   while (c > maxCost) {
+        //     c -= Math.abs(s[l].charCodeAt() - t[l].charCodeAt());
+        //     l++;
+        //   }
+        //   res = Math.max(r - l + 1, res);
+        //   r++;
+        // }
+        // return res;
+      };
+
+      function getMax(s, t, k) {
+        let left = 0,
+          count = 0,
+          res = 0;
+
+        for (let right = 0; right < t.length; right++) {
+          count += Math.abs(s[right].charCodeAt() - t[right].charCodeAt());
+
+          while (count > k) {
+            count -= Math.abs(s[left].charCodeAt() - t[left].charCodeAt());
+            left++;
+          }
+          res = Math.max(right - left + 1, res);
+        }
+        return res;
+      }
+      var a = equalSubstring("abcd", "bcdf", 3); // 3
+      // var a = equalSubstring("abcd", "cdef", 3); // 1
+      // var a = equalSubstring("abcd", "acde", 0); // 1
+      // var a = maxConsecutiveAnswers("TFFT", 1); // 3
+      // var a = maxConsecutiveAnswers("TTFTTFTT", 1); // 5
+      console.log("a===", a);
+    </script>
+  </body>
+</html>

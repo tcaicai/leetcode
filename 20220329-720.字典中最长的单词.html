@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var longestWord = function (words) {
+        let res = "";
+
+        words.sort((a, b) => {
+          if (a.length !== b.length) {
+            return a.length - b.length;
+          } else {
+            return b.localeCompare(a);
+          }
+        });
+        console.log(words);
+        let set = new Set();
+        set.add("");
+        for (let i = 0; i < words.length; i++) {
+          let word = words[i];
+          let pre = word.slice(0, -1);
+          if (set.has(pre)) {
+            res = word;
+            set.add(word);
+          }
+        }
+        return res;
+      };
+      // const a = longestWord([]);
+      // const a = longestWord(["w", "wo", "wor", "worl", "world"]);
+      const a = longestWord([
+        "a",
+        "banana",
+        "app",
+        "appl",
+        "ap",
+        "apply",
+        "apple",
+      ]);
+      // console.log("a===", a);
+      // console.log(b);
+    </script>
+  </body>
+</html>

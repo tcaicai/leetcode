@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(1);
+      tree.left = new TreeNode(2);
+      tree.right = new TreeNode(3);
+
+      tree.left.left = new TreeNode(4);
+      tree.left.right = new TreeNode(5);
+
+      var binaryTreePaths = function (root) {
+        let res = [];
+
+        const dfs = (node, path) => {
+          if (root === null) return;
+
+          path += node.val;
+          if (node.left === null && node.right === null) res.push(path);
+
+          path += "->";
+
+          if (node.left) dfs(node.left, path);
+          if (node.right) dfs(node.right, path);
+        };
+        dfs(root, "");
+
+        return res;
+      };
+
+      var binaryTreePaths0 = function (root) {
+        const paths = [];
+        const construct_paths = (root, path) => {
+          if (root) {
+            path += root.val.toString();
+            if (root.left === null && root.right === null) {
+            } else {
+              path += "->";
+              construct_paths(root.left, path);
+              construct_paths(root.right, path);
+            }
+          }
+        };
+        construct_paths(root, "");
+        return paths;
+      };
+
+      var binaryTreePaths1 = function (root) {
+        const paths = [];
+        if (root === null) {
+          return paths;
+        }
+        const node_queue = [root];
+        const path_queue = [root.val.toString()];
+
+        while (node_queue.length) {
+          const node = node_queue.shift();
+          const path = path_queue.shift();
+
+          if (node.left === null && node.right === null) {
+            paths.push(path);
+          } else {
+            if (node.left !== null) {
+              node_queue.push(node.left);
+              path_queue.push(path + "->" + node.left.val.toString());
+            }
+
+            if (node.right !== null) {
+              node_queue.push(node.right);
+              path_queue.push(path + "->" + node.right.val.toString());
+            }
+          }
+        }
+        return paths;
+      };
+
+      const r = binaryTreePaths(tree);
+      console.log(r);
+    </script>
+  </body>
+</html>

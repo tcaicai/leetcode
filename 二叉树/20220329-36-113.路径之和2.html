@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(1);
+      tree.left = new TreeNode(2);
+      tree.right = new TreeNode(3);
+
+      tree.left.left = new TreeNode(4);
+      tree.left.right = new TreeNode(5);
+
+      var pathSum = function (root, targetSum) {
+        let res = [];
+
+        const dfs = (node, sum, arr) => {
+          if (node === null) return;
+
+          let curValue = node.val;
+          arr.push(node.val);
+
+          if (node.left === null && node.right === null && curValue === sum) {
+            res.push(arr);
+          }
+
+          let newSum = sum - curValue;
+
+          if (node.left)
+            dfs(node.left, newSum, JSON.parse(JSON.stringify(arr)));
+          if (node.right)
+            dfs(node.right, newSum, JSON.parse(JSON.stringify(arr)));
+        };
+        dfs(root, targetSum, []);
+        return res;
+      };
+      const r = pathSum(tree, 40);
+      console.log(r);
+    </script>
+  </body>
+</html>

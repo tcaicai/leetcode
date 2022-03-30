@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(1);
+      tree.left = new TreeNode(2);
+      tree.right = new TreeNode(5);
+
+      tree.left.left = new TreeNode(4);
+      tree.left.right = new TreeNode(3);
+      tree.left.right.right = new TreeNode(1);
+
+      var pathSum = function (root, targetSum) {};
+
+      // method - 1
+      var pathSum1 = function (root, targetSum) {
+        if (root == null) {
+          return 0;
+        }
+
+        let ret = rootSum(root, targetSum);
+        ret += pathSum(root.left, targetSum);
+        ret += pathSum(root.right, targetSum);
+        return ret;
+      };
+
+      const rootSum = (root, targetSum) => {
+        let ret = 0;
+
+        if (root == null) {
+          return 0;
+        }
+        const val = root.val;
+        if (val === targetSum) {
+          ret++;
+        }
+
+        ret += rootSum(root.left, targetSum - val);
+        ret += rootSum(root.right, targetSum - val);
+        return ret;
+      };
+
+      // method - 2
+      var pathSum2 = function (root, targetSum) {
+        const prefix = new Map();
+        prefix.set(0, 1);
+        return dfs(root, prefix, 0, targetSum);
+      };
+
+      const dfs = (root, prefix, curr, targetSum) => {
+        if (root == null) {
+          return 0;
+        }
+
+        let ret = 0;
+        curr += root.val;
+
+        ret = prefix.get(curr - targetSum) || 0;
+        prefix.set(curr, (prefix.get(curr) || 0) + 1);
+        ret += dfs(root.left, prefix, curr, targetSum);
+        ret += dfs(root.right, prefix, curr, targetSum);
+        prefix.set(curr, (prefix.get(curr) || 0) - 1);
+
+        return ret;
+      };
+
+      const r = pathSum1(tree, 6);
+      console.log(r);
+    </script>
+  </body>
+</html>

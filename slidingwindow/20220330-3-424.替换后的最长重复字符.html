@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var maxConsecutiveAnswers = function (s, k) {
+        let arr = [...new Set([...s])];
+        let resArr = arr.map((char) => getMax(char, s, k));
+        return Math.max(...resArr);
+      };
+      function getMax(word, answerKey, k) {
+        let left = 0,
+          count = 0,
+          res = 0;
+
+        for (let right = 0; right < answerKey.length; right++) {
+          count += answerKey.charAt(right) === word ? 0 : 1;
+
+          if (count > k) {
+            while (left < right && answerKey.charAt(left) === word) {
+              left++;
+            }
+            left++;
+            count--;
+          }
+          res = Math.max(right - left + 1, res);
+        }
+        return res;
+      }
+
+      var a = maxConsecutiveAnswers(
+        "IMNJJTRMJEGMSOLSCCQICIHLQIOGBJAEHQOCRAJQMBIBATGLJDTBNCPIFRDLRIJHRABBJGQAOLIKRLHDRIGERENNMJSDSSMESSTR",
+        2
+      ); // 4
+      // var a = maxConsecutiveAnswers("TFFT", 1); // 3
+      // var a = maxConsecutiveAnswers("TTFTTFTT", 1); // 5
+      console.log("a===", a);
+    </script>
+  </body>
+</html>

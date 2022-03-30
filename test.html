@@ -8,6 +8,18 @@
   </head>
   <body>
     <script>
+      let arr = [1, 2, 3];
+      let arr1 = arr;
+      // let arr1 = arr.slice();
+
+      arr.push(4);
+      console.log(arr); // [1,2,3,4]
+      console.log(arr1); // [1,2,3,4]
+
+      arr = [666];
+      arr.push(5);
+      console.log("arr==", arr); // [5]
+      console.log("arr1===", arr1); // [1,2,3,4]
       var twoSum = function (nums, target) {
         let obj = {};
         for (let i = 0; i < nums.length; i++) {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TreeNode {
+        constructor(val, left, right) {
+          this.val = val;
+          this.left = left || null;
+          this.right = right || null;
+        }
+      }
+
+      let tree = new TreeNode(4);
+      tree.left = new TreeNode(1);
+      tree.right = new TreeNode(6);
+
+      // tree.left.left = new TreeNode(0);
+      // tree.left.right = new TreeNode(2);
+      // tree.left.right.right = new TreeNode(3);
+
+      // tree.right.left = new TreeNode(5);
+      // tree.right.right = new TreeNode(7);
+      // tree.right.right.right = new TreeNode(8);
+
+      var lowestCommonAncestor = function (root, p, q) {
+        if (root === null) return null;
+        const dfs = (root) => {
+          if (root === null)
+            return {
+              commonAncestor: null,
+              findQ: false,
+              findP: false,
+            };
+
+          let leftInfo = dfs(root.left);
+          let rightInfo = dfs(root.right);
+
+          let findP = leftInfo.findP || rightInfo.findP || root.val === p;
+          let findQ = leftInfo.findQ || rightInfo.findQ || root.val === q;
+          let commonAncestor =
+            leftInfo.commonAncestor || rightInfo.commonAncestor || null;
+          if (!commonAncestor && findP && findQ) commonAncestor = root;
+
+          return {
+            commonAncestor,
+            findP,
+            findQ,
+          };
+        };
+        let { commonAncestor } = dfs(root);
+        return commonAncestor;
+      };
+      const r = lowestCommonAncestor(tree, 1, 4);
+      console.log(r);
+    </script>
+  </body>
+</html>
