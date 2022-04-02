@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(val) {
+          this.val = val;
+          this.isEnd = false;
+          this.children = {};
+        }
+      }
+
+      var Trie = function () {
+        this.root = new Node();
+      };
+
+      /**
+       * @param {string} word
+       * @return {void}
+       */
+      Trie.prototype.insert = function (word) {
+        let head = this.root;
+        for (let i = 0; i < word.length; i++) {
+          let char = word.charAt(i);
+          let isExist = head.children[char];
+
+          if (!isExist) head.children[char] = new Node(char);
+
+          head = head.children[char];
+
+          if (i === word.length - 1) head.isEnd = true;
+        }
+      };
+
+      /**
+       * @param {string} word
+       * @return {boolean}
+       */
+      Trie.prototype.search = function (word) {
+        let head = this.root;
+        for (let i = 0; i < word.length; i++) {
+          let char = word.charAt(i);
+          if (!head.children[char]) return false;
+
+          head = head.children[char];
+          if (i === word.length - 1) return head.isEnd === true;
+        }
+      };
+
+      /**
+       * @param {string} prefix
+       * @return {boolean}
+       */
+      Trie.prototype.startsWith = function (prefix) {
+        let head = this.root;
+        for (let i = 0; i < prefix.length; i++) {
+          let char = prefix.charAt(i);
+          if (!head.children[char]) return false;
+
+          head = head.children[char];
+        }
+        return true;
+      };
+
+      let trie = new Trie();
+      trie.insert("hello");
+      console.log("apple", trie.search("hell")); // 返回 True
+      console.log("app", trie.search("helloa")); // 返回 False
+      console.log("app", trie.search("hello")); // 返回 False
+      console.log("start app", trie.startsWith("hell")); // 返回 True
+      console.log("start app", trie.startsWith("helloa")); // 返回 True
+      console.log("start app", trie.startsWith("hello")); // 返回 True
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var selfDividingNumbers = function (left, right) {
+        let res = [];
+        for (let i = left; i <= right; i++) {
+          let isValid = getIsValid(i + "");
+          isValid && res.push(i);
+        }
+
+        return res;
+      };
+      function getIsValid(num) {
+        let arr = [...num];
+        for (let s of arr) {
+          if (num % s !== 0) return false;
+        }
+        return true;
+      }
+      var a = selfDividingNumbers(1, 22);
+      // var a = selfDividingNumbers(47, 85);
+      console.log("a===", a);
+    </script>
+  </body>
+</html>

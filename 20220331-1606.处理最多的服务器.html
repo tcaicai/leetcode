@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var busiestServers = function (k, arrival, load) {
+        const servers = new Uint32Array(k);
+        const count = new Uint32Array(k);
+        let max = 0;
+
+        const n = arrival.length;
+        for (let i = 0; i < n; i++) {
+          const index = i % k;
+          for (let j = 0; j < k; j++) {
+            let availableServer = (index + j) % k;
+
+            if (arrival[i] >= servers[availableServer]) {
+              servers[availableServer] = arrival[i] + load[i];
+              count[availableServer]++;
+              max = Math.max(max, count[availableServer]);
+              break;
+            }
+          }
+        }
+
+        const res = [];
+        for (let i = 0; i < k; i++) {
+          if (count[i] == max) {
+            res.push(i);
+          }
+        }
+
+        return res;
+      };
+      // 输入：k = 3, arrival = [1,2,3,4,5], load = [5,2,3,3,3]
+      // 输出：[1]
+      // 输入：k = 3, arrival = [1,2,3,4], load = [1,2,1,2]
+      // 输出：[0]
+      // 输入：k = 3, arrival = [1,2,3], load = [10,12,11]
+      // 输出：[0,1,2]
+      // 输入：k = 3, arrival = [1,2,3,4,8,9,10], load = [5,2,10,3,1,2,2]
+      // 输出：[1]
+      // 输入：k = 1, arrival = [1], load = [1]
+      // 输出：[0]
+      var a = selfDividingNumbers(3, [1, 2, 3, 4, 5], [5, 2, 3, 3, 3]);
+      // var a = selfDividingNumbers(47, 85);
+      console.log("a===", a);
+    </script>
+  </body>
+</html>

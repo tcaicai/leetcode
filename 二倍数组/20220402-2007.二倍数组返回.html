@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {number[]} arr
+       * @return {boolean}
+       */
+      var findOriginalArray = function (changed) {
+        let res = [];
+        let map = new Map();
+
+        changed.map((item) => {
+          map.set(item, (map.get(item) || 0) + 1);
+        });
+
+        const zeroCount = map.get(0) || 0;
+        if (zeroCount % 2 === 1) return [];
+
+        let keys = [...map.keys()];
+        keys.sort((a, b) => Math.abs(a) - Math.abs(b));
+
+        for (let key of keys) {
+          let keyCount = map.get(key) || 0;
+          let key2Count = map.get(key * 2) || 0;
+
+          if (keyCount > key2Count) return [];
+
+          map.set(2 * key, key2Count - keyCount);
+
+          if (keyCount !== 0) {
+            console.log("keyCount", keyCount);
+            let length = key === 0 ? keyCount / 2 : keyCount;
+            let temp = new Array(length).fill(key);
+            res.push(...temp);
+          }
+        }
+
+        return res;
+      };
+      // var a = findOriginalArray([1, 1, 3, 4, 2, 2, 6, 8]); // [1,3,4]
+      // var a = findOriginalArray([6, 3, 0, 1]); // []
+      // var a = findOriginalArray([1]); // []
+      var a = findOriginalArray([0, 0]);
+      console.log("a========", a);
+    </script>
+  </body>
+</html>

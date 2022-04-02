@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {number[]} arr
+       * @return {boolean}
+       */
+      var canReorderDoubled = function (arr) {
+        let map = new Map();
+
+        arr.map((item) => {
+          map.set(item, (map.get(item) || 0) + 1);
+        });
+
+        const zeroCount = map.get(0) || 0;
+        if (zeroCount % 2 === 1) return false;
+
+        let keys = [...map.keys()];
+        keys.sort((a, b) => Math.abs(a) - Math.abs(b));
+
+        for (let key of keys) {
+          let keyCount = map.get(key) || 0;
+          let key2Count = map.get(key * 2) || 0;
+
+          if (keyCount > key2Count) return false;
+
+          map.set(2 * key, key2Count - keyCount);
+        }
+        return true;
+      };
+      const a = canReorderDoubled([4, -2, 2, -4]);
+      console.log("a========", a);
+    </script>
+  </body>
+</html>
