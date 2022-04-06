@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class SegmentTree {
+        constructor(start, end) {
+          this.start = start;
+          this.end = end;
+
+          this.val = 0;
+          this.left = null;
+          this.right = null;
+        }
+      }
+
+      /**
+       * @param {number[]} nums
+       */
+      var NumArray = function (nums) {
+        this.root = buildTree(nums, 0, nums.length - 1);
+
+        function buildTree(nums, start, end) {
+          if (start > end) return;
+
+          let node = new SegmentTree(start, end);
+
+          if (start === end) {
+            node.val = nums[start];
+          } else {
+            let mid = start + ((end - start) >> 1);
+
+            node.left = buildTree(nums, start, mid);
+            node.right = buildTree(nums, mid + 1, end);
+
+            node.val = node.left.val + node.right.val;
+          }
+          return node;
+        }
+      };
+
+      /**
+       * @param {number} left
+       * @param {number} right
+       * @return {number}
+       */
+      NumArray.prototype.sumRange = function (left, right) {
+        return sumRange(this.root, left, right);
+      };
+
+      function sumRange(node, left, right) {
+        if (node.start === left && node.end === right) return node.val;
+
+        let mid = node.start + ((node.end - node.start) >> 1);
+
+        if (right <= mid) return sumRange(node.left, left, right);
+        if (left > mid) return sumRange(node.right, left, right);
+
+        return (
+          sumRange(node.left, left, mid) + sumRange(node.right, mid + 1, right)
+        );
+      }
+
+      let tree = new NumArray([1, 3, 5, 7, 9, 11]);
+      console.log(" tree.root===", tree.root);
+
+      let sum = tree.sumRange(3, 5);
+      console.log("sumRange 3-5===", sum);
+
+      /**
+       * Your NumArray object will be instantiated and called as such:
+       * var obj = new NumArray(nums)
+       * var param_1 = obj.sumRange(left,right)
+       */
+    </script>
+  </body>
+</html>
