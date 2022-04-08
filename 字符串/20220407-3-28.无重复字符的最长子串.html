@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var lengthOfLongestSubstring = function (s) {
+        let slow = 0,
+          fast = 0,
+          map = new Map(),
+          arr = [...s];
+
+        let res = 0;
+
+        for (fast = 0; fast < arr.length; fast++) {
+          let char = arr[fast];
+          if (map.has(char)) {
+            let slowIndex = map.get(char);
+            slow = Math.max(slowIndex + 1, slow);
+          }
+          res = Math.max(res, fast - slow + 1);
+          map.set(char, fast);
+        }
+        return res;
+      };
+      // var a = lengthOfLongestSubstring("abcabcbb"); // 3
+      // var a = lengthOfLongestSubstring("bbbbb"); // 1
+      // var a = lengthOfLongestSubstring("pwwkew"); // 3
+      // var a = lengthOfLongestSubstring(" "); // 1
+      // var a = lengthOfLongestSubstring(""); // 0
+      // var a = lengthOfLongestSubstring("dvdf"); // 3
+      // var a = lengthOfLongestSubstring("abcd"); // 4
+      // var a = lengthOfLongestSubstring("abba"); // 2
+      var a = lengthOfLongestSubstring("tmmzuxt"); // 5
+      console.log("res===", a);
+    </script>
+  </body>
+</html>
