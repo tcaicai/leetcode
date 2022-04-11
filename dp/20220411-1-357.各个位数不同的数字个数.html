@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var dp = function (n) {
+        if (n === 0) return 1;
+
+        let dp = new Array(n).fill(null);
+        dp[0] = 9;
+
+        // dp[0]: n = 1 9
+        // dp[1]: n = 2 9*9
+        // dp[2]: n = 3 9 * 9 * 8
+        for (let i = 1; i < n; i++) {
+          dp[i] = (10 - i) * dp[i - 1];
+        }
+
+        return dp.reduce((pre, cur) => (pre += cur)) + 1;
+      };
+
+      var recursion = function (n) {
+        if (n === 0) return 1;
+        if (n === 1) return 10;
+
+        base = 9;
+        for (let i = 1; i < n; i++) {
+          base *= 10 - i;
+        }
+        return base + recursion(n - 1);
+      };
+
+      // var a = dp(0); // 1
+      // var a = dp(1); // 10
+      // var a = dp(2); // 91
+      var a = dp(3); // 739
+      var a1 = recursion(3); // 739
+      console.log("a===", a);
+      console.log("a1===", a1);
+    </script>
+  </body>
+</html>

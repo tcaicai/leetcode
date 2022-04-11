@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var uniqueMorseRepresentations = function (words) {
+        let map = [
+          ".-",
+          "-...",
+          "-.-.",
+          "-..",
+          ".",
+          "..-.",
+          "--.",
+          "....",
+          "..",
+          ".---",
+          "-.-",
+          ".-..",
+          "--",
+          "-.",
+          "---",
+          ".--.",
+          "--.-",
+          ".-.",
+          "...",
+          "-",
+          "..-",
+          "...-",
+          ".--",
+          "-..-",
+          "-.--",
+          "--..",
+        ];
+        const seen = new Set();
+        for (const word of words) {
+          let code = "";
+          for (const ch of word) {
+            code += map[ch.charCodeAt() - "a".charCodeAt()];
+          }
+          seen.add(code);
+        }
+        return seen.size;
+      };
+      var a = uniqueMorseRepresentations(["a"]); // 2
+      // var a = reachingPoints(1, 1, 1, 1); // true
+      // var a = reachingPoints(1, 1, 2, 2); // false
+      console.log("a===", a);
+    </script>
+  </body>
+</html>
