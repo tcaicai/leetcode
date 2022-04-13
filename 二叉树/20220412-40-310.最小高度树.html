@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var findMinHeightTrees = function (n, edges) {
+        if (n === 1) return [0];
+
+        let leaves = [];
+        let degree = new Array(n).fill(0),
+          adjacency = new Array(n).fill(0).map((item) => new Array());
+
+        for (let [node1, node2] of edges) {
+          adjacency[node1].push(node2);
+          adjacency[node2].push(node1);
+
+          degree[node1]++;
+          degree[node2]++;
+        }
+        console.log("1、邻接表===", adjacency);
+
+        degree.map((item, index) => item === 1 && leaves.push(index));
+
+        console.log("2、叶子节点===", leaves);
+
+        let len = n;
+        while (len > 2) {
+          let length = leaves.length;
+          console.log("3、叶子数===", length);
+
+          for (let i = 0; i < length; i++) {
+            const curr = leaves.shift();
+            for (const v of adjacency[curr]) {
+              degree[v]--;
+              if (degree[v] === 1) {
+                leaves.push(v);
+              }
+            }
+          }
+
+          len -= length;
+        }
+
+        return leaves;
+      };
+      var a = findMinHeightTrees(2, [[1, 0]]); // [0,1]
+
+      // var a = findMinHeightTrees(4, [
+      //   [1, 0],
+      //   [1, 2],
+      //   [1, 3],
+      // ]); // [1]
+      // var a = findMinHeightTrees(6, [
+      //   [3, 0],
+      //   [3, 1],
+      //   [3, 2],
+      //   [3, 4],
+      //   [4, 5],
+      // ]); // [3,4]
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

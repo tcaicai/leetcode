@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var numberOfLines = function (widths, s) {
+        let line = 1,
+          lastLineCount = 0;
+        let arr = [...s];
+        for (let char of arr) {
+          let index = char.charCodeAt() - "a".charCodeAt();
+          let width = widths[index];
+
+          let newLength = lastLineCount + width;
+          if (newLength > 100) {
+            line++;
+            lastLineCount = width;
+          } else {
+            lastLineCount += width;
+          }
+        }
+        return [line, lastLineCount];
+      };
+      var a = numberOfLines(
+        [
+          10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+          10, 10, 10, 10, 10, 10, 10, 10, 10,
+        ],
+        "abcdefghijklmnopqrstuvwxyz"
+      ); // [3, 60]
+      var a = numberOfLines(
+        [
+          4, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+          10, 10, 10, 10, 10, 10, 10, 10,
+        ],
+        "bbbcccdddaaa"
+      ); // [2, 4]
+
+      console.log("a===", a);
+    </script>
+  </body>
+</html>

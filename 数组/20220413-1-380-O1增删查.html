@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var RandomizedSet = function () {
+        this.set = [];
+        this.map = new Map();
+        this.length = 0;
+      };
+
+      RandomizedSet.prototype.insert = function (val) {
+        let isExist = this.map.has(val);
+        if (!isExist) {
+          this.set.push(val);
+          this.length++;
+          this.map.set(val, this.length - 1);
+        }
+        return isExist ? false : true;
+      };
+
+      RandomizedSet.prototype.remove = function (val) {
+        let isExist = this.map.has(val);
+        if (isExist) {
+          let index = this.map.get(val);
+          [this.set[index], this.set[this.length - 1]] = [
+            this.set[this.length - 1],
+            this.set[index],
+          ];
+          this.map.set(this.set[index], index);
+          this.set.pop();
+          this.map.delete(val);
+          this.length--;
+        }
+
+        return isExist ? true : false;
+      };
+
+      RandomizedSet.prototype.getRandom = function () {
+        let randomIndex = Math.floor(Math.random() * this.length);
+        return this.set[randomIndex];
+      };
+
+      // let randomizedSet = new RandomizedSet();
+      // let a = randomizedSet.insert(1); // 向集合中插入 1 。返回 true 表示 1 被成功地插入。
+      // let a1 = randomizedSet.remove(2); // 返回 false ，表示集合中不存在 2 。
+      // let a2 = randomizedSet.insert(2); // 向集合中插入 2 。返回 true 。集合现在包含 [1,2] 。
+      // let a3 = randomizedSet.getRandom(); // getRandom 应随机返回 1 或 2 。
+      // let a4 = randomizedSet.remove(1); // 从集合中移除 1 ，返回 true 。集合现在包含 [2] 。
+      // let a5 = randomizedSet.insert(2); // 2 已在集合中，所以返回 false 。
+      // let a6 = randomizedSet.getRandom(); // 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。
+
+      let randomizedSet = new RandomizedSet();
+      let a = randomizedSet.insert(0);
+      let a1 = randomizedSet.insert(1);
+      let a2 = randomizedSet.remove(0);
+      let a3 = randomizedSet.insert(2);
+      let a4 = randomizedSet.remove(1);
+      let a5 = randomizedSet.getRandom();
+
+      //   [null,true,true,true,true,true,1]
+      // Expected Answer
+      // [null,true,true,true,true,true,2]
+
+      console.log(
+        a +
+          "-" +
+          a1 +
+          "-" +
+          a2 +
+          "-" +
+          a3 +
+          "-" +
+          a4 +
+          "-" +
+          a5 +
+          "-" +
+          a6 +
+          "-"
+      );
+    </script>
+  </body>
+</html>
