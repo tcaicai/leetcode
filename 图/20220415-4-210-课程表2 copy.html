@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var findOrder = function (numCourses, prerequisites) {
+        let res = [];
+
+        let adjacency = new Array(numCourses).fill(0).map(() => new Array());
+        let inDegree = new Array(numCourses).fill(0);
+
+        for (let [cur, pre] of prerequisites) {
+          adjacency[pre].push(cur);
+          inDegree[cur]++;
+        }
+        console.log(adjacency);
+        console.log(inDegree);
+
+        let queue = [];
+
+        inDegree.map((item, index) => item === 0 && queue.push(index));
+
+        while (queue.length) {
+          let index = queue.shift();
+          res.push(index);
+
+          for (let item of adjacency[index]) {
+            inDegree[item]--;
+            inDegree[item] === 0 && queue.unshift(item);
+          }
+        }
+
+        return res.length === numCourses ? res : [];
+      };
+      var a = findOrder(2, [[1, 0]]); // [0,1]
+      // var a = findOrder(4, [
+      //   [1, 0],
+      //   [2, 0],
+      //   [3, 1],
+      //   [3, 2],
+      // ]); // [0,2,1,3]
+      // var a = findOrder(1, []); // [0]
+      // var a = findOrder(3, [
+      //   [1, 0],
+      //   [1, 2],
+      //   [0, 1],
+      // ]); // []
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

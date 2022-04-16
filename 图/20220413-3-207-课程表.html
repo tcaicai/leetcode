@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const canFinish = (numCourses, prerequisites) => {
+        let res = 0;
+        let adjacency = new Array(numCourses).fill(0).map(() => new Array());
+        let inDegree = new Array(numCourses).fill(0);
+
+        for (let [cur, pre] of prerequisites) {
+          adjacency[pre].push(cur);
+          inDegree[cur]++;
+        }
+        console.log("1、邻接表===", adjacency);
+        console.log("2、入度数组===", inDegree);
+
+        let queue = [];
+        inDegree.filter((item, index) => item === 0 && queue.push(index));
+        console.log("3、入度为0的节点===", queue);
+
+        while (queue.length) {
+          let node = queue.shift();
+          res++;
+          let list = adjacency[node];
+          for (let index of list) {
+            inDegree[index]--;
+
+            if (inDegree[index] === 0) queue.push(index);
+          }
+        }
+        console.log("res==", res);
+        return res === numCourses;
+      };
+      // var a = canFinish(2, [[1, 0]]);
+      // var a = canFinish(2, [
+      //   [1, 0],
+      //   [0, 1],
+      // ]);
+      var a = canFinish(6, [
+        [3, 1],
+        [3, 2],
+        [4, 0],
+        [4, 1],
+        [5, 3],
+        [5, 4],
+      ]);
+      // var a = canFinish(4, [
+      //   [1, 0],
+      //   [2, 0],
+      //   [3, 1],
+      //   [3, 2],
+      // ]); // [0,2,1,3]
+
+      // var a = canFinish(2, [[0, 1]]);
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

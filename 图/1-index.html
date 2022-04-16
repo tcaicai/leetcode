@@ -15,27 +15,33 @@
       class Node {
         constructor(value) {
           this.value = value;
-          this.in = 0;
-          this.out = 0;
-          this.edges = [];
-          this.nexts = [];
+          this.in = 0; // 入度
+          this.out = 0; // 出度
+          this.edges = []; // 进入的节点
+          this.nexts = []; // 出去的节点
         }
       }
 
       class Edge {
         constructor(weight, from, to) {
-          this.weight = weight;
+          this.weight = weight; // 权重
           this.from = from;
           this.to = to;
         }
       }
 
       class Graph {
-        constructor(nodes, edges) {
-          this.nodes = nodes;
-          this.edges = edges;
+        constructor() {
+          this.nodes = new Map(); // val -> Node
+          this.edges = []; // Edge
         }
       }
+
+      let data = [
+        [7, 0, 1],
+        [3, 1, 2],
+        [5, 0, 2],
+      ];
     </script>
   </body>
 </html>

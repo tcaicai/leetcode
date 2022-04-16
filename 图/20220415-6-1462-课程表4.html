@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var scheduleCourse = function (numCourses, prerequisites, queries) {
+        let dp = [];
+        for (let i = 0; i < numCourses; i++) {
+          dp[i] = new Array(numCourses).fill(false);
+        }
+        prerequisites.forEach(([i, j]) => (dp[i][j] = true));
+        console.log("矩阵===", dp);
+        for (let k = 0; k < numCourses; k++) {
+          for (let i = 0; i < numCourses; i++) {
+            for (let j = 0; j < numCourses; j++) {
+              dp[i][j] = dp[i][j] || (dp[i][k] && dp[k][j]);
+            }
+          }
+        }
+        return queries.map(([i, j]) => dp[i][j]);
+      };
+      var a = scheduleCourse(
+        5,
+        [
+          [4, 3],
+          [4, 1],
+          [4, 0],
+          [3, 2],
+          [3, 1],
+          [3, 0],
+          [2, 1],
+          [2, 0],
+          [1, 0],
+        ],
+        [
+          [1, 4],
+          [4, 2],
+          [0, 1],
+          [4, 0],
+          [0, 2],
+          [1, 3],
+          [0, 1],
+        ]
+      );
+      // var a = scheduleCourse(
+      //   2,
+      //   [[1, 0]],
+      //   [
+      //     [0, 1],
+      //     [1, 0],
+      //   ]
+      // ); // [false,true] 解释：课程 0 不是课程 1 的先修课程，但课程 1 是课程 0 的先修课程。
+      // var a = scheduleCourse(
+      //   2,
+      //   [],
+      //   [
+      //     [1, 0],
+      //     [0, 1],
+      //   ]
+      // ); // [false,false] 解释：没有先修课程对，所以每门课程之间是独立的。
+      // var a = scheduleCourse(
+      //   3,
+      //   [
+      //     [1, 2],
+      //     [1, 0],
+      //     [2, 0],
+      //   ],
+      //   [
+      //     [1, 0],
+      //     [1, 2],
+      //   ]
+      // ); // [true, true]
+      // var a = scheduleCourse(
+      //   5,
+      //   [
+      //     [0, 1],
+      //     [1, 2],
+      //     [2, 3],
+      //     [3, 4],
+      //   ],
+      //   [
+      //     [0, 4],
+      //     [4, 0],
+      //     [1, 3],
+      //     [3, 0],
+      //   ]
+      // ); // [true, false, true, false]
+      // var a = scheduleCourse(
+      //   5,
+      //   [
+      //     [3, 4],
+      //     [2, 3],
+      //     [1, 2],
+      //     [0, 1],
+      //   ],
+      //   [
+      //     [0, 4],
+      //     [4, 0],
+      //     [1, 3],
+      //     [3, 0],
+      //   ]
+      // ); // [true,false,true,false]
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

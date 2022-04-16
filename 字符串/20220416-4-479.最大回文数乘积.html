@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var largestPalindrome = function (n) {
+        let upper = Math.pow(10, n) - 1;
+        let lower = Math.pow(10, n - 1);
+
+        let base = upper - 1;
+        for (base; base >= lower; base--) {
+          let target = BigInt(base + [...String(base)].reverse().join(""));
+          let i = BigInt(upper);
+          for (i; i * i >= target; i--) {
+            if (target % i === BigInt(0)) {
+              console.log("i===", i);
+              console.log("target===", target);
+              return target % BigInt(1337);
+            }
+          }
+        }
+        return 9;
+      };
+      var a = largestPalindrome(8); // 475 BigInt
+      // var a = largestPalindrome(7); // 877
+      // var a = largestPalindrome(6); // 1218
+      // var a = largestPalindrome(5); // 677
+      // var a = largestPalindrome(4); // 597
+      // var a = largestPalindrome(3); // 123
+      // var a = largestPalindrome(2); // 987
+      // var a = largestPalindrome(1); // 9
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

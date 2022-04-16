@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var maximumWealth = function (accounts) {
+        let res = 0;
+        for (let arr of accounts) {
+          res = Math.max(
+            res,
+            arr.reduce((pre, cur) => pre + cur)
+          );
+        }
+        return res;
+      };
+      var a = maximumWealth([
+        [1, 2, 3],
+        [3, 2, 1],
+      ]); // 6
+      // var a = maximumWealth([
+      //   [1, 5],
+      //   [7, 3],
+      //   [3, 5],
+      // ]); // 10
+      // var a = maximumWealth([
+      //   [2, 8, 7],
+      //   [7, 1, 3],
+      //   [1, 9, 5],
+      // ]); // 17
+      console.log("a===", a);
+    </script>
+  </body>
+</html>
