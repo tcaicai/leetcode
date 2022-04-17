@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var merge = function (nums1, m, nums2, n) {
+        let p1 = 0,
+          p2 = 0,
+          res = [];
+        while (p1 < m || p2 < n) {
+          let a = nums1[p1];
+          let b = nums2[p2];
+          if (a > b || p1 === m) {
+            res.push(b);
+            p2++;
+          } else {
+            res.push(a);
+            p1++;
+          }
+        }
+        for (let i = 0; i < m + n; i++) {
+          nums1[i] = res[i];
+        }
+
+        // 此处为了测试代码
+        return nums1;
+      };
+
+      // var a = merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3); // [1,2,2,3,5,6]
+
+      // var a = merge([1], 1, [], 0); // [1]
+      var a = merge([0], 0, [1], 1); // [1]
+      console.log(a);
+    </script>
+  </body>
+</html>

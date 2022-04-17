@@ -17,7 +17,7 @@
           this.value = value;
           this.in = 0; // 入度
           this.out = 0; // 出度
-          this.edges = []; // 进入的节点
+          this.pres = []; // 进入的节点
           this.nexts = []; // 出去的节点
         }
       }
@@ -37,11 +37,93 @@
         }
       }
 
+      function createGraph(matrix) {
+        let graph = new Graph();
+
+        for (let [weight, from, to] of matrix) {
+          if (!graph.nodes.has(from)) {
+            graph.nodes.set(from, new Node(from));
+          }
+          if (!graph.nodes.has(to)) {
+            graph.nodes.set(to, new Node(to));
+          }
+
+          let fromNode = graph.nodes.get(from);
+          let toNode = graph.nodes.get(to);
+          let edge = new Edge(weight, fromNode, toNode);
+
+          fromNode.nexts.push(toNode);
+          fromNode.out++;
+
+          toNode.pres.push(fromNode);
+          toNode.in++;
+
+          graph.edges.push(edge);
+        }
+        return graph;
+      }
+
       let data = [
         [7, 0, 1],
         [3, 1, 2],
         [5, 0, 2],
+        [1, 2, 3],
+        [2, 1, 4],
+        [3, 4, 5],
       ];
+      let graph = createGraph(data);
+      console.log("graph==", graph);
+
+      function bfs(node) {
+        if (node === null) return;
+
+        let queue = [];
+        let set = new Set(); // 无向图更重要
+
+        queue.push(node);
+        set.add(node);
+
+        while (queue.length) {
+          let cur = queue.shift();
+          console.log("bfs node", cur.value);
+
+          for (let next of cur.nexts) {
+            if (!set.has(next)) {
+              set.add(next);
+              queue.push(next);
+            }
+          }
+        }
+      }
+      bfs(graph.nodes.get(0));
+
+      console.log("-------------------------");
+
+      function dfs(node) {
+        if (node === null) return;
+
+        let stack = [];
+        let set = new Set();
+
+        stack.push(node);
+        set.add(node);
+        console.log("dfs node", node.value);
+
+        while (stack.length) {
+          let cur = stack.pop();
+          for (let next of cur.nexts) {
+            if (!set.has(next)) {
+              stack.push(cur); // a->b a->c 到b的时候在把a放回去为了遍历c
+              stack.push(next);
+              set.add(next);
+              console.log("dfs node", next.value);
+              break; // a->b a->c 到b中不在遍历c 取走b的后代
+            }
+          }
+        }
+      }
+
+      dfs(graph.nodes.get(0));
     </script>
   </body>
 </html>
