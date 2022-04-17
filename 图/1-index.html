@@ -124,6 +124,42 @@
       }
 
       dfs(graph.nodes.get(0));
+
+      console.log("-------------------------");
+
+      // 拓扑排序 --- 有向
+      //        +
+      //        --- 无环
+      //        +
+      //        --- 存在入度为0的节点
+
+      function sortedTOpology(graph) {
+        let res = [];
+        let inMap = new Map();
+        let zeroInQueue = [];
+
+        for (let node of graph.nodes.values()) {
+          inMap.set(node, node.in);
+          if (node.in === 0) {
+            zeroInQueue.push(node);
+          }
+        }
+
+        while (zeroInQueue.length) {
+          let cur = zeroInQueue.shift();
+          res.push(cur.value);
+
+          for (let next of cur.nexts) {
+            inMap.set(next, inMap.get(next) - 1);
+            if (inMap.get(next) === 0) {
+              zeroInQueue.push(next);
+            }
+          }
+        }
+        return res;
+      }
+      let sorted = sortedTOpology(graph);
+      console.log(sorted);
     </script>
   </body>
 </html>
