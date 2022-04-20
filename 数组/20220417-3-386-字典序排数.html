@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var lexicalOrder1 = function (n) {
+        let arr = new Array(n).fill(0);
+        for (let i = 0; i < n; i++) {
+          arr[i] = i + 1;
+        }
+        return arr.sort();
+      };
+
+      var lexicalOrder = function (n) {
+        const ret = [];
+        let number = 1;
+        for (let i = 0; i < n; i++) {
+          ret.push(number);
+          if (number * 10 <= n) {
+            number *= 10;
+          } else {
+            while (number % 10 === 9 || number + 1 > n) {
+              debugger;
+              console.log("while中的number===", number);
+              number = Math.floor(number / 10);
+            }
+            number++;
+          }
+        }
+        return ret;
+      };
+      // var a = lexicalOrder(13); // [1,10,11,12,13,2,3,4,5,6,7,8,9]
+      // var a = lexicalOrder(2); // [1,2]
+      var a = lexicalOrder(20);
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

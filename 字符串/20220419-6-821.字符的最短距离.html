@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 左右分别循环
+      var shortestToChar = function (s, c) {
+        let arr = [...s],
+          len = s.length;
+        let res = new Array(len).fill(len);
+        let left = len - 1;
+        let right = 0;
+
+        for (let i = 0; i < len; i++) {
+          if (arr[i] === c) {
+            left = i;
+          }
+          let min = Math.min(Math.abs(i - left), res[i]);
+          res[i] = min;
+        }
+
+        for (let i = len - 1; i >= 0; i--) {
+          if (arr[i] === c) {
+            right = i;
+          }
+          let min = Math.min(Math.abs(right - i), res[i]);
+          res[i] = min;
+        }
+
+        return res;
+      };
+      // 双指针法
+      var shortestToChar1 = function (s, c) {
+        let arr = [...s],
+          len = arr.length;
+        let left = arr[0] === c ? 0 : len;
+        let right = s.indexOf(c, 1);
+
+        let res = new Array(len).fill(len);
+
+        for (let i = 0; i < len; i++) {
+          if (arr[i] === c) {
+            left = i;
+            right = s.indexOf(c, i + 1);
+          }
+          let min = Math.min(Math.abs(left - i), Math.abs(right - i));
+
+          res[i] = min;
+        }
+        return res;
+      };
+      var a = shortestToChar("loveleetcode", "e"); // [3,2,1,0,1,0,0,1,2,2,1,0]
+      // var a = shortestToChar("aaab", "b");
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

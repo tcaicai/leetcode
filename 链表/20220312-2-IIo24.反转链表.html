@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>链表反转之递归法</title>
+  </head>
+  <body>
+    <script>
+      var reverseList = function (head) {
+        if (head === null || head.next === null) {
+          return head;
+        }
+        let next = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return next;
+      };
+
+      class Node {
+        constructor(val, next) {
+          this.val = val;
+          this.next = next;
+        }
+      }
+      let n1 = new Node(1, null);
+      let n2 = new Node(2, null);
+      let n3 = new Node(3, null);
+      n1.next = n2;
+      n2.next = n3;
+
+      let res = reverseList(n1);
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>链表深拷贝</title>
+  </head>
+  <body>
+    <script>
+      // [
+      //   [7, null],
+      //   [13, 0],
+      //   [11, 4],
+      //   [10, 2],
+      //   [1, 0],
+      // ];
+      class Node {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+          this.random = random ? random : null;
+        }
+      }
+      let n1 = new Node(7),
+        n2 = new Node(13),
+        n3 = new Node(11),
+        n4 = new Node(10),
+        n5 = new Node(1);
+      n1.next = n2;
+      n2.next = n3;
+      n2.random = n1;
+      n3.next = n4;
+      n3.random = n5;
+      n4.next = n5;
+      n4.random = n3;
+      n5.random = n1;
+
+      var copyRandomList = function (head) {
+        let map = new Map();
+
+        let h1 = head;
+        while (h1) {
+          let node = new Node(h1.val, null, null);
+          map.set(h1, node);
+          h1 = h1.next;
+        }
+        // random的值是随机的所以第二次遍历的时候才能知道
+        let h2 = head;
+        while (h2) {
+          let node = map.get(h2) || null; // null 不要忘了写
+          node.next = map.get(h2.next) || null;
+          node.random = map.get(h2.random) || null;
+          h2 = h2.next;
+        }
+        return map.get(head);
+      };
+      var a = copyRandomList(n1);
+      console.log("res===", a);
+    </script>
+  </body>
+</html>
