@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重排链表</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+        }
+      }
+      let n1 = new ListNode(1),
+        n2 = new ListNode(2),
+        n3 = new ListNode(3),
+        n4 = new ListNode(4),
+        n5 = new ListNode(5);
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      // n4.next = n5;
+
+      var reorderList = function (head) {
+        let map = new Map();
+        let len = 0;
+        while (head) {
+          map.set(len++, head);
+          head = head.next;
+        }
+        let halfLen = Math.ceil(len / 2);
+        let i = 0;
+
+        let list = new ListNode();
+        let dummy = list;
+        while (i < halfLen) {
+          list.next = map.get(i);
+          list.next.next = map.get(len - i - 1);
+          console.log(list);
+          list = list.next.next;
+          if (i === halfLen - 1) list.next = null;
+          i++;
+        }
+        return dummy.next;
+      };
+      var a = reorderList(n1); // head = [1,2,3,4,5] -> [1,5,2,4,3] , [1,2,3,4] -> [1,4,2,3]
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

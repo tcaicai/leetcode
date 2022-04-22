@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * dir
+       *  +---- subdir1
+       *  |
+       *  +---- subdir2
+       *           +----file.ext
+       */
+      /**
+       * @param {string} input
+       * @return {number}
+       */
+      // var lengthLongestPath = function (input) {
+      //   let res = 0,
+      //     pre = [];
+      //   const arr = input.split("\n").map((a) => a.split("\t"));
+      //   console.log("arr===", arr);
+      //   arr.forEach((a) => {
+      //     let path = [];
+      //     a.forEach((b, i) => {
+      //       console.log(`b=${b}###pre=${pre[i]}`);
+      //       path.push(b || pre[i]);
+      //       if (b.indexOf(".") >= 0) {
+      //         res = Math.max(res, path.join("/").length);
+      //       }
+      //     });
+      //     pre = path;
+      //   });
+      //   return res;
+      // };
+      // var a = lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"); // 20 dir/subdir2/file.ext
+      /**
+       * dir
+       *  +---- subdir1
+       *  |        +---- file1.ext
+       *  |        |
+       *  |        +---- subsubdir1
+       *  |
+       *  +---- subdir2
+       *           +---- subsubdir2
+       *                     +----file.ext
+       */
+      var lengthLongestPath = function (input) {
+        let res = 0,
+          pre = [];
+        let arr = input.split("\n").map((item) => item.split("\t"));
+
+        for (let subarray of arr) {
+          let stack = [];
+          subarray.forEach((name, index) => {
+            stack.push(name || pre[index]);
+            if (name.indexOf(".") > -1) {
+              res = Math.max(res, stack.join("/").length);
+            }
+          });
+          pre = stack;
+        }
+        return res;
+      };
+      // var a = lengthLongestPath(
+      //   "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
+      // ); // 32
+      // var a = lengthLongestPath("a"); // 0
+      var a = lengthLongestPath("file1.txt\nfile2.txt\nlongfile.txt"); // 12
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

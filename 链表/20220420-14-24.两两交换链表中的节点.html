@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>k个一组反转链表</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+        }
+      }
+      let n1 = new ListNode(1),
+        n2 = new ListNode(2),
+        n3 = new ListNode(3),
+        n4 = new ListNode(4),
+        n5 = new ListNode(5);
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      n4.next = n5;
+
+      var swapPairs = function (head, K = 2) {
+        let num = 0;
+        let h1 = head;
+        while (head && num < K) {
+          head = head.next;
+          num++;
+        }
+        if (num < K) {
+          return h1;
+        }
+        let pre = swapPairs(head);
+
+        while (K > 0) {
+          let next = h1.next;
+          h1.next = pre;
+          pre = h1;
+          h1 = next;
+          K--;
+        }
+        return pre;
+      };
+      var a = swapPairs(n1); // head = [1,2,3,4,5], k = 2 --> [2,1,4,3,5]
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

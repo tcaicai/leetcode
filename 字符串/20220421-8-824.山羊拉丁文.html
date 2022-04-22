@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var toGoatLatin = function (sentence) {
+        let vowel = ["a", "e", "i", "o", "u"];
+        let arr = sentence.split(" ");
+        return arr
+          .reduce((pre, char, index) => {
+            let initial = char.charAt(0).toLowerCase();
+            if (!vowel.includes(initial)) {
+              char = char.slice(1) + char.charAt(0);
+            }
+            return (
+              pre + char + "ma" + new Array(index + 1).fill("a").join("") + " "
+            );
+          }, "")
+          .trim();
+      };
+      // var a = toGoatLatin("I speak Goat Latin"); // "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+      // var a = toGoatLatin("The quick brown fox jumped over the lazy dog"); //"heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+      var a = toGoatLatin(
+        "Each word consists of lowercase and uppercase letters only"
+      ); // "Eachmaa ordwmaaa onsistscmaaaa ofmaaaaa owercaselmaaaaaa andmaaaaaaa uppercasemaaaaaaaa etterslmaaaaaaaaa onlymaaaaaaaaaa"
+      console.log("res====", a);
+    </script>
+  </body>
+</html>

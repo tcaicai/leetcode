@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>k个一组反转链表</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+        }
+      }
+      let n1 = new ListNode(1),
+        n2 = new ListNode(2),
+        n3 = new ListNode(3),
+        n4 = new ListNode(4),
+        n5 = new ListNode(5);
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      n4.next = n5;
+
+      var mergeKLists = function (lists) {
+        if (lists.length === 0) return null;
+        let arr = [];
+        for (let list of lists) {
+          while (list) {
+            arr.push(list.val);
+            list = list.next;
+          }
+        }
+        let sortedArr = arr.sort((a, b) => a - b);
+
+        let head = new ListNode();
+        let dummy = head;
+        sortedArr.forEach((num) => {
+          head.next = new ListNode(num);
+          head = head.next;
+        });
+        return dummy.next;
+      };
+      var a = mergeKLists([n1, n1]); // head = [1,2,3,4,5], k = 2 --> [2,1,4,3,5]
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>
