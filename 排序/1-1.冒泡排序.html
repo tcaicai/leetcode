@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>冒泡排序</title>
+  </head>
+  <body>
+    <script>
+      // 牛客网输入
+      const readline = require("readline");
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+      const input = [];
+      rl.on("line", function (line) {
+        input.push(line.trim());
+        if (input.length === 2) {
+          const length = input[0];
+          const arr = input[1].split(" ").map((n) => parseInt(n));
+        }
+      });
+
+      /**
+       * 第一轮：两两比较，大的放在倒数第一个 (length-1确实为目前最大值)
+       * 第二轮：两两比较，大的放在倒数第二个 (length-2确实为目前最大值)
+       * ......
+       * 最后一轮：index = 0 为最小值
+       */
+      function bubbleSort(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+        return arr;
+      }
+      console.log(bubbleSort([1, 3, 6, 2, 9, 7]));
+    </script>
+  </body>
+</html>

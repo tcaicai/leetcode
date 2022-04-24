@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二进制间距</title>
+  </head>
+  <body>
+    <script>
+      var binaryGap = function (n) {
+        let res = 0,
+          lastOne = 0;
+        let b = n.toString(2);
+        let arr = [...b];
+        arr.forEach((item, index) => {
+          if (+item === 1) {
+            res = Math.max(index - lastOne, res);
+            lastOne = index;
+          }
+        });
+        return res;
+      };
+      var a = binaryGap(22); // 2 10110
+      //   var a = binaryGap(8); // 0
+      //   var a = binaryGap(5); // 2
+      console.log("res===", a);
+    </script>
+  </body>
+</html>
