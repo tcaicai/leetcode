@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重排链表</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+        }
+      }
+      let n1 = new ListNode(-1),
+        n2 = new ListNode(5),
+        n3 = new ListNode(3),
+        n4 = new ListNode(4),
+        n5 = new ListNode(0);
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      n4.next = n5;
+
+      var sortList = function (head) {
+        let arr = [];
+        while (head) {
+          arr.push(head.val);
+          head = head.next;
+        }
+        arr.sort((a, b) => a - b);
+
+        let h = new ListNode();
+        let dummy = h;
+        for (let num of arr) {
+          h.next = new ListNode(num);
+          h = h.next;
+        }
+        return dummy.next;
+      };
+      var a = sortList(n1);
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>
