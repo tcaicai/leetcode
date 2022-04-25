@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>异或</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 异或（^）相同为0，不同为1（无进位相加）
+       * 1、0^N = N N^N = 0
+       * 2、满足结合律和交换律 a^b = b^a
+       * 3、不用额外空间交换两个数 a = a^b b = a^b a = a^b
+       * 4、一个数组中只有一个数出现奇数次，其他都是偶数次，怎么找到这个奇数次的值
+       * 5、一个数组中只有两个数出现奇数次，其他都是偶数次，怎么找到这两个奇数次的值
+       */
+      function findOne(len, arr) {
+        return arr.reduce((pre, cur) => pre ^ cur);
+      }
+      var res = findOne(5, [1, 1, 1, 2, 1]); // 2
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

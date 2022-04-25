@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归</title>
+  </head>
+  <body>
+    <script>
+      // sortBy 1:升序 0：降序
+      function scoreRanking(arr, sortBy) {
+        return arr.sort((pre, cur) => {
+          let [name1, score1] = pre.split(" ");
+          let [name2, score2] = cur.split(" ");
+
+          return sortBy ? score1 - score2 : score2 - score1;
+        });
+      }
+      var res = scoreRanking(["a 100", "b 99", "c 79", "d 60", "e 55"], 1);
+      var res = scoreRanking(["a 100", "b 99", "c 79", "d 60", "e 55"], 0);
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

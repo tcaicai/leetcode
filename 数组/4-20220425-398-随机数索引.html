@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var Solution = function (nums) {
+        this.map = new Map();
+        nums.forEach((num, index) => {
+          if (this.map.has(num)) {
+            this.map.get(num).push(index);
+          } else {
+            this.map.set(num, [index]);
+          }
+        });
+        console.log(this.map);
+      };
+
+      Solution.prototype.pick = function (target) {
+        let indexs = this.map.get(target);
+        index = (Math.random() * indexs.length) | 0;
+        return indexs[index];
+      };
+      let solution = new Solution([1, 2, 3, 3, 3]);
+      var res = solution.pick(3); // 2/3/4
+      console.log("res==", res);
+    </script>
+  </body>
+</html>

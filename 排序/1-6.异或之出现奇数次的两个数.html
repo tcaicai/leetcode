@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>异或</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 异或（^）相同为0，不同为1（无进位相加）
+       * 1、0^N = N N^N = 0
+       * 2、满足结合律和交换律 a^b = b^a
+       * 3、不用额外空间交换两个数 a = a^b b = a^b a = a^b
+       * 4、一个数组中只有一个数出现奇数次，其他都是偶数次，怎么找到这个奇数次的值
+       * 5、一个数组中只有两个数出现奇数次，其他都是偶数次，怎么找到这两个奇数次的值
+       */
+      function findTwo(arr) {
+        let eor = arr.reduce((pre, cur) => pre ^ cur);
+        // 提取一个不为0的数最右侧的1
+        let diffOne = eor & (~eor + 1);
+
+        let findOne;
+        arr.forEach((item) => {
+          // item这个数在这一位上是1的数
+          // 例如：diffOne = 00001  00010
+          //         item = 11101  11101
+          //                00001  00000
+          if (item & diffOne) findOne = findOne ^ item;
+        });
+        let othenOne = eor ^ findOne;
+
+        return [findOne, othenOne];
+      }
+      var res = findTwo([1, 1, 2, 3]); // 2 3
+      var res = findTwo([11, 22, 11, 23, 23, 45]); // 22 45
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

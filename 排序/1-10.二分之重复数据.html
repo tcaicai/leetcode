@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归</title>
+  </head>
+  <body>
+    <script>
+      function findIndex(target, array) {
+        let len = array.length;
+        let res = len;
+        let left = 0,
+          right = len - 1;
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          if (target > array[mid]) {
+            left = mid + 1;
+          } else {
+            res = mid;
+            right = mid - 1;
+          }
+        }
+        return res + 1;
+      }
+      var a = findIndex(4, [1, 2, 4, 4, 5]); // 3
+      var a = findIndex(4, [1, 2, 3, 3, 5]); // 5
+      var a = findIndex(4, [1, 1, 2, 3, 3]); // 6
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var solution = function (isBadVersion) {
+        /**
+         * @param {integer} n Total versions
+         * @return {integer} The first bad version
+         */
+        return function (n) {
+          let left = 1;
+          right = n;
+          let res = n;
+          while (left <= right) {
+            let mid = left + ((right - left) >> 1);
+            if (isBadVersion(mid)) {
+              res = mid;
+              right = mid - 1;
+            } else left = mid + 1;
+          }
+          return res;
+        };
+      };
+      function isBadVersion(version) {
+        let res = false;
+        if (version >= 4) res = true;
+        return res;
+      }
+      var a = solution(isBadVersion)(5); // 4
+      // var a = solution(isBadVersion)(3); // 1
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

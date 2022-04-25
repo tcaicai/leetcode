@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归</title>
+  </head>
+  <body>
+    <script>
+      function findMax(arr, left, right) {
+        if (left === right) {
+          return arr[left];
+        }
+        let mid = left + ((right - left) >> 1);
+        let leftMax = findMax(arr, left, mid);
+        let rightMax = findMax(arr, mid + 1, right);
+        return Math.max(leftMax, rightMax);
+      }
+      var res = findMax([1, 2, 3, 4, 5], 0, 4); // 5
+      // var res = findMax([5, 4, 3, 2], 0, 3); // 5
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
