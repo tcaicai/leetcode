@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var findDisappearedNumbers = function (nums) {
+        let arr = new Array(nums.length).fill(0).map(() => 0);
+        for (let num of nums) {
+          arr[num - 1]++;
+        }
+        let res = [];
+        arr.forEach((item, index) => {
+          arr[index] === 0 && res.push(index + 1);
+        });
+        return res;
+      };
+
+      // var res = findDisappearedNumbers([4, 3, 2, 7, 8, 2, 3, 1]); // [5，6]
+      var res = findDisappearedNumbers([1, 1]); // [2]
+      console.log("res==", res);
+    </script>
+  </body>
+</html>

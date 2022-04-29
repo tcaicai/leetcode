@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var peakIndexInMountainArray = function (arr) {
+        let left = 0,
+          right = arr.length - 1;
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) return mid;
+          else if (arr[mid] < arr[mid - 1]) right = mid - 1;
+          else left = mid + 1;
+        }
+        return -1;
+      };
+      var a = peakIndexInMountainArray([0, 1, 0]); // 1
+      // var a = peakIndexInMountainArray([0, 10, 5, 2]); // 1
+      // var a = peakIndexInMountainArray([3, 4, 5, 1]); // 2
+      // var a = peakIndexInMountainArray([
+      //   24, 69, 100, 99, 79, 78, 67, 36, 26, 19,
+      // ]); // 2
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

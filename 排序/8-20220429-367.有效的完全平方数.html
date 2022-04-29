@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二进制间距</title>
+  </head>
+  <body>
+    <script>
+      var isPerfectSquare = function (num) {
+        let left = 0,
+          right = num;
+
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          let square = mid * mid;
+          if (square === num) return true;
+          else if (square > num) right = mid - 1;
+          else left = mid + 1;
+        }
+        return false;
+      };
+      // var a = isPerfectSquare(16); // true
+      // var a = isPerfectSquare(14); // false
+      var a = isPerfectSquare(1); // true
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

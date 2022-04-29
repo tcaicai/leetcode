@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 双指针
+      var sortArrayByParity = function (nums) {
+        let len = nums.length;
+        let res = new Array(len).fill(0);
+        let left = 0,
+          right = len - 1;
+
+        nums.forEach((num) => {
+          if (num & 1) {
+            // 基数
+            res[right--] = num;
+          } else {
+            res[left++] = num;
+          }
+        });
+        return res;
+      };
+
+      // 数组api
+      var sortArrayByParity1 = function (nums) {
+        let newArr = [];
+        let odd = 0;
+        nums.forEach((num, index) => {
+          if (num & 1) {
+            newArr.push(num);
+          } else {
+            newArr.unshift(num);
+          }
+        });
+        return newArr;
+      };
+      var res = sortArrayByParity([3, 1, 2, 4]); // [2,4,3,1]
+      // var res = sortArrayByParity([0]); // [0]
+      console.log("res==", res);
+    </script>
+  </body>
+</html>
