@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      // 二分法解题 ？？？？？？？？
+      var findTheDistanceValue = function (arr1, arr2, d) {
+        return arr1.filter((num1) =>
+          arr2.every((num2) => Math.abs(num1 - num2) > d)
+        ).length;
+      };
+      var a = findTheDistanceValue([4, 5, 8], [10, 9, 1, 8], 2); // 2
+      // var a = findTheDistanceValue([1, 4, 2, 3], [-4, -3, 6, 10, 20, 30], 3); // 2
+      // var a = findTheDistanceValue([2, 1, 100, 3], [-5, -2, 10, -3, 7], 6); // 1
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

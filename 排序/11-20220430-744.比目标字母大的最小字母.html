@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      var nextGreatestLetter = function (letters, target) {
+        let left = 0,
+          right = letters.length - 1;
+        let res = letters[0];
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          let letter = letters[mid];
+          if (letter.charCodeAt() > target.charCodeAt()) {
+            res = letter;
+            right = mid - 1;
+          } else {
+            left = mid + 1;
+          }
+        }
+        return res;
+      };
+      var a = nextGreatestLetter(["c", "f", "j"], "a"); // c
+      var a = nextGreatestLetter(["c", "f", "j"], "c"); // f
+      var a = nextGreatestLetter(["c", "f", "j"], "d"); // f
+      var a = nextGreatestLetter(["c", "f", "j"], "j"); // c
+
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

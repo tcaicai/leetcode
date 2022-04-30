@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var maxProfit = function (prices) {
+        if (prices.length === 0) return 0;
+        let min = prices[0];
+        let profit = 0;
+        for (let price of prices) {
+          min = price < min ? price : min;
+          profit = Math.max(price - min, profit);
+        }
+        return profit;
+      };
+      // var res = maxProfit([7, 1, 5, 3, 6, 4]); // 5
+      var res = maxProfit([7, 6, 4, 3, 1]); // 0
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

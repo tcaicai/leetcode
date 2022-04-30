@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      var mySqrt = function (x) {
+        let left = 0,
+          right = x;
+        let res = 0;
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          let square = mid * mid;
+          if (square <= x) {
+            res = mid;
+            left = mid + 1;
+          } else {
+            right = mid - 1;
+          }
+        }
+        return res;
+      };
+      var a = mySqrt(4); // 2
+      // var a = mySqrt(8); // 2
+      console.log("res===", a);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二进制间距</title>
+  </head>
+  <body>
+    <script>
+      var smallestRangeI = function (nums, k) {
+        let max = Math.max(...nums);
+        let min = Math.min(...nums);
+
+        return max - min <= 2 * k ? 0 : max - min - 2 * k;
+      };
+      var res = smallestRangeI([1], 0); // 0
+      // var res = smallestRangeI([0, 10], 2); // 6
+      // var res = smallestRangeI([1, 3, 6], 3); // 0
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
