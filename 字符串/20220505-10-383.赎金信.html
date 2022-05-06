@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var canConstruct = function (ransomNote, magazine) {
+        let arr = [...ransomNote];
+        let arr2 = [...magazine];
+        for (let char of arr) {
+          let startIndex = arr2.indexOf(char);
+          if (startIndex === -1) return false;
+          arr2.splice(startIndex, 1);
+        }
+        return true;
+      };
+      var a = canConstruct("a", "b"); // false
+      // var a = canConstruct("aa", "ab"); // false
+      // var a = canConstruct("aa", "aab"); // true
+
+      console.log("res====", a);
+    </script>
+  </body>
+</html>

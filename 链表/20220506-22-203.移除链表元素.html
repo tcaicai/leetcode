@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>移除链表元素</title>
+  </head>
+  <body>
+    <script>
+      class ListNode {
+        constructor(val, next, random) {
+          this.val = val;
+          this.next = next ? next : null;
+        }
+      }
+      let n1 = new ListNode(1),
+        n1_2 = new ListNode(2),
+        n1_3 = new ListNode(6);
+      n1_4 = new ListNode(3);
+      n1_5 = new ListNode(4);
+      n1_6 = new ListNode(5);
+      n1_7 = new ListNode(6);
+      n1.next = n1_2;
+      n1_2.next = n1_3;
+      n1_3.next = n1_4;
+      n1_4.next = n1_5;
+      n1_5.next = n1_6;
+      n1_6.next = n1_7;
+
+      var removeElements = function (head, val) {
+        if (head === null) return null;
+
+        let dummy = new ListNode();
+        dummy.next = head;
+        let h = dummy;
+
+        while (dummy.next) {
+          if (dummy.next.val == val) {
+            let next = dummy.next.next;
+            dummy.next = next;
+          } else {
+            dummy = dummy.next;
+          }
+        }
+        return h.next;
+      };
+      var res = removeElements(n1, 6); // [1,2,6,3,4,5,6]，6 --> [1,2,3,4,5]
+      // var res = removeElements(n1, 1); // []，1 --> []
+      // var res = removeElements(n1, 1); // [7,7,7,7]，7 --> []
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

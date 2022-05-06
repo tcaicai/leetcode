@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>相当于二叉树的中序遍历</title>
+  </head>
+  <body>
+    <script>
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+      var getAllElements = function (root1, root2) {
+        const dfs = (root, arr) => {
+          if (root === null) return;
+          if (root.left) dfs(root.left, arr);
+          arr.push(root.val);
+          if (root.right) dfs(root.right, arr);
+          return arr;
+        };
+        let arr1 = dfs(root1, []) || [];
+        let arr2 = dfs(root2, []) || [];
+
+        return arr1.concat(arr2).sort((a, b) => a - b);
+      };
+
+      let t1_1 = new TreeNode(2);
+      let t1_2 = new TreeNode(1);
+      let t1_3 = new TreeNode(4);
+      t1_1.left = t1_2;
+      t1_1.right = t1_3;
+
+      let t2_1 = new TreeNode(1);
+      let t2_2 = new TreeNode(0);
+      let t2_3 = new TreeNode(3);
+      t2_1.left = t2_2;
+      t2_1.right = t2_3;
+
+      var res = getAllElements(t1_1, t2_1);
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

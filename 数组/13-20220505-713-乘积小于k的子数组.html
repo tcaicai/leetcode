@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var numSubarrayProductLessThanK = function (nums, k) {
+        let count = 0;
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] < k) {
+            count++;
+            let base = nums[i];
+            for (let j = i + 1; j < nums.length; j++) {
+              base = base * nums[j];
+              if (base < k) count++;
+              else break;
+            }
+          }
+        }
+        return count;
+      };
+
+      var res = numSubarrayProductLessThanK([10, 5, 2, 6], 100); // 8
+      // var res = numSubarrayProductLessThanK([1, 2, 3], 0); // 0
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
