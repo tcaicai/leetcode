@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试题汉诺塔</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 没有模型的纯暴力递归
+       */
+      var hanota = function (n) {
+        const move = (n, left, right, middle) => {
+          if (n === 1) {
+            console.log(`1 从${left}到${right}`);
+          } else {
+            move(n - 1, left, middle, right);
+            console.log(`${n} 从${left}到${right}`);
+            move(n - 1, middle, right, left);
+          }
+        };
+
+        if (n > 0) {
+          move(n, "左", "右", "中");
+        }
+      };
+      hanota(3);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var findDuplicates = function (nums) {
+        let res = [];
+
+        for (let i = 0; i < nums.length; i++) {
+          let index = Math.abs(nums[i]) - 1;
+
+          if (nums[index] > 0) {
+            nums[index] = -nums[index];
+          } else {
+            res.push(index + 1);
+          }
+        }
+        return res;
+      };
+      // var res = findDuplicates([4, 3, 2, 7, 8, 2, 3, 1]); // [2,3]
+      // var res = findDuplicates([1, 1, 2]); // [1]
+      var res = findDuplicates([1]); // []
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

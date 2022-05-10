@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getDiff(originStr, changedStr) {
+        let diff = 0;
+        for (let i = 0; i < changedStr.length; i++) {
+          if (originStr[i] !== changedStr[i]) diff++;
+        }
+
+        return diff;
+      }
+
+      function getCount(map, count) {
+        if (count > 1) {
+          map.get(count);
+        }
+      }
+      var minMutation = function (start, end, bank) {
+        let count = getDiff(start, end);
+        if (count === 1) return 1;
+        if (bank.length < diff) return -1;
+
+        let map = new Map();
+        for (let eg of bank) {
+          let diff = getDiff(start, eg);
+          if (diff <= count) {
+            if (map.has(diff)) {
+              map.get(diff).push(eg);
+            } else {
+              map.set(diff, [eg]);
+            }
+          }
+        }
+
+        getCount(map, count);
+      };
+
+      var res = minMutation("AACCGGTT", "AACCGGTA", ["AACCGGTA"]); // 1
+      // var res = minMutation("AACCGGTT", "AAACGGTA", [
+      //   "AACCGGTA",
+      //   "AACCGCTA",
+      //   "AAACGGTA",
+      // ]); // 2
+      // var res = minMutation("AAAAACCC", "AACCCCCC", [
+      //   "AAAACCCC",
+      //   "AAACCCCC",
+      //   "AACCCCCC",
+      // ]); // 3
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

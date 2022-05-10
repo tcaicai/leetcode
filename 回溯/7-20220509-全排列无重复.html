@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全排列无重复</title>
+  </head>
+  <body>
+    <script>
+      function process(arr, path, res) {
+        if (arr.length === 0) {
+          res.push(path);
+        } else {
+          let picks = new Set();
+          for (let i = 0; i < arr.length; i++) {
+            if (!picks.has(arr[i])) {
+              picks.add(arr[i]);
+              let pick = path + arr[i];
+              let next = Array.from(arr);
+              next.splice(i, 1);
+              process(next, pick, res);
+            }
+          }
+        }
+      }
+      var getAllC = function (str) {
+        let res = [];
+        let arr = [...str];
+
+        process(arr, "", res);
+        return res;
+      };
+      var res = getAllC("aac");
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>打印所有子序列</title>
+  </head>
+  <body>
+    <script>
+      function process(arr, index, path, res) {
+        if (index === arr.length) {
+          res.push(path);
+        } else {
+          process(arr, index + 1, path, res);
+          process(arr, index + 1, path + arr[index], res);
+        }
+      }
+      var getAllSubSeq = function (str) {
+        let res = [];
+
+        if (str == null) return res;
+        if (str.length == 0) return res.push([""]);
+
+        let arr = [...str];
+        process(arr, 0, "", res);
+        return res;
+      };
+
+      var res = getAllSubSeq("abc");
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

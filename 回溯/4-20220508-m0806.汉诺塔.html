@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试题汉诺塔</title>
+  </head>
+  <body>
+    <script>
+      var hanota = function (A, B, C) {
+        let n = A.length;
+        let move = function (m, left, right, middle) {
+          if (m === 1) {
+            // 当只有一个时直接加到c中
+            right.push(left.pop());
+          } else {
+            move(m - 1, left, middle, right);
+            right.push(left.pop());
+            move(m - 1, middle, right, left);
+          }
+        };
+        move(n, A, C, B);
+        console.log("res===", C);
+      };
+      hanota([2, 1, 0], [], []);
+    </script>
+  </body>
+</html>

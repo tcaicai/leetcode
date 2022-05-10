@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全排列无重复</title>
+  </head>
+  <body>
+    <script>
+      function process(arr, index) {
+        if (index === arr.length) return 1;
+
+        if (arr[index] == "0") return 0;
+
+        if (arr[index] == "1") {
+          let res = process(arr, index + 1);
+          if (index + 1 < arr.length) res += process(arr, index + 2);
+          return res;
+        }
+
+        if (arr[index] == "2") {
+          let res = process(arr, index + 1);
+          if (
+            index + 1 < arr.length &&
+            arr[index + 1] >= "0" &&
+            arr[index + 1] <= 6
+          )
+            res += process(arr, index + 2);
+          return res;
+        }
+
+        return process(arr, i + 1);
+      }
+      var number = function (str) {
+        if (str == null || str.length == 0) return 0;
+
+        return process([...str], 0);
+      };
+      var res = number("111");
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
