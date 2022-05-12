@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>相当于二叉树的中序遍历</title>
+  </head>
+  <body>
+    <script>
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+      function serialize(root) {
+        if (root == null) {
+          return "#";
+        }
+        return (
+          root.val + "," + serialize(root.left) + "," + serialize(root.right)
+        );
+      }
+
+      function deserialize(data) {
+        let arr = data.split(",");
+        return deserializeArr(arr);
+      }
+
+      function deserializeArr(arr) {
+        if (arr[0] == "#") {
+          arr.shift();
+          return null;
+        }
+
+        let node = new TreeNode(arr[0]);
+        arr.shift();
+        node.left = deserializeArr(arr);
+        node.right = deserializeArr(arr);
+        return node;
+      }
+
+      let t1_1 = new TreeNode(1);
+      let t1_2 = new TreeNode(2);
+      let t1_3 = new TreeNode(3);
+      let t1_4 = new TreeNode(4);
+      let t1_5 = new TreeNode(5);
+      let t1_6 = new TreeNode(6);
+      t1_1.left = t1_2;
+      t1_1.right = t1_3;
+
+      t1_2.left = t1_4;
+      t1_2.right = t1_5;
+
+      t1_3.left = t1_6;
+
+      var res = serialize(t1_1);
+      console.log("res===", res);
+      var res1 = deserialize(res);
+      console.log("res reverse===", res1);
+    </script>
+  </body>
+</html>

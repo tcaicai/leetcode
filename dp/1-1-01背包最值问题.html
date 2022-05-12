@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态规划</title>
+  </head>
+  <body>
+    <script>
+     var getMostPrice = function(weights, prices, size){
+       let len = weights.length;
+       let dp = new Array(size + 1).fill(0);
+
+       for(let i = 1; i<=len; i++) {
+        for (let j = size; j >= weights[i - 1]; j--) {
+          dp[j] = Math.max(dp[j], dp[j - weights[i - 1]] + prices[i - 1]);
+        }  
+       }
+
+       return dp[size]
+     }
+
+     let weights = [1,3,4];
+     let prices = [15,20,30];
+     let size = 4;
+     let res = getMostPrice(weights,prices, size);
+     console.log('res===', res)
+     </script>
+    </script>
+  </body>
+</html>
