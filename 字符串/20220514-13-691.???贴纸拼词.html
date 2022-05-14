@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var minStickers = function (stickers, target) {
+        let targetArr = [...new Set([...target])];
+        let rowLen = stickers.length;
+        let columnLen = targetArr.length;
+
+        let arr = new Array(rowLen).fill().map(() => new Array());
+
+        for (let row = 0; row < rowLen; row++) {
+          let word = stickers[row];
+          for (let column = 0; column < columnLen; column++) {
+            let char = targetArr[column];
+            if (word.includes(char)) {
+              arr[row].push(char);
+            }
+          }
+        }
+
+        let sortedArr = arr.sort((a, b) => b.length - a.length);
+        let targetLen = targetArr.length;
+        if (sortedArr[0].length === targetLen) return 1;
+      };
+      var a = minStickers(["with", "example", "science", "thte"], "thehat"); // 3
+      // var a = minStickers(["notice", "possible"], "basicbasic"); // -1
+
+      console.log("res====", a);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var minDeletionSize = function (strs) {
+        let row = strs.length;
+        let column = strs[0].length;
+
+        let res = 0;
+
+        for (let i = 0; i < column; i++) {
+          for (let j = 1; j < row; j++) {
+            let pre = strs[j - 1][i];
+            let cur = strs[j][i];
+            console.log(`pre=${pre} ----- cur=${cur}`);
+            if (pre.charCodeAt() > cur.charCodeAt()) {
+              res++;
+              break;
+            }
+          }
+        }
+        return res;
+      };
+      // var res = minDeletionSize(["cba", "daf", "ghi"]); // 1
+      // var res = minDeletionSize(["a", "b"]); // 0
+      // var res = minDeletionSize(["zyx", "wvu", "tsr"]); // 3
+      var res = minDeletionSize(["rrjk", "furt", "guzm"]); // 2
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

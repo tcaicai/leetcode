@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var oneEditAway = function (first, second) {
+        let firstLen = first.length;
+        let secondLen = second.length;
+
+        if (Math.abs(firstLen - secondLen) > 1) return false;
+
+        let diff = 0;
+        let left = 0;
+        let firstRight = firstLen - 1;
+        let secondRight = secondLen - 1;
+
+        while (left < firstRight || left < secondRight) {
+          if (first[left] === second[left]) left++;
+          else if (first[firstRight] === second[secondRight]) {
+            firstRight--;
+            secondRight--;
+          } else {
+            diff++;
+            if (diff > 1) return false;
+          }
+        }
+
+        return firstRight - left > 1 || secondRight - left > 1 ? false : true;
+      };
+      var a = oneEditAway("pale", "ple"); // true
+      // var a = oneEditAway("pales", "pal"); // false
+      console.log("res====", a);
+    </script>
+  </body>
+</html>

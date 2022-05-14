@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>完全背包的组合问题</title>
+  </head>
+  <body>
+    <script>
+      var combinationSum4 = function (nums, target) {
+        let dp = new Array(target + 1).fill(0);
+        dp[0] = 1;
+        for (let i = 1; i <= target; i++) {
+          for (const num of nums) {
+            if (num <= i) {
+              dp[i] += dp[i - num];
+            }
+          }
+        }
+        return dp[target];
+        // for (let num of nums) {
+        //   for (let i = num; i <= target; i++) {
+        //     dp[i] += dp[i - num];
+        //   }
+        // }
+      };
+
+      var res = combinationSum4([1, 2, 3], 4); // 7
+      // var res = combinationSum4([9], 3); // 0
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

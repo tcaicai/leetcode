@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dp值路径问题</title>
+  </head>
+  <body>
+    <script>
+      // 二维数组
+      var uniquePaths2 = function (m, n) {
+        let dp = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(1));
+
+        for (i = 1; i < m; i++) {
+          for (j = 1; j < n; j++) {
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+          }
+        }
+
+        return dp[m - 1][n - 1];
+      };
+
+      // 以为数组
+      var uniquePaths = function (m, n) {
+        let dp = new Array(n + 1).fill(1);
+
+        for (let i = 1; i < m; i++) {
+          for (let j = 1; j < n; j++) {
+            dp[j] += dp[j - 1];
+          }
+        }
+        return dp[n - 1];
+      };
+
+      var res = uniquePaths(3, 7); // 28
+      // var res = uniquePaths(3, 2); // 3
+      // var res = uniquePaths(7, 3); // 28
+      // var res = uniquePaths(3, 3); // 6
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
