@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isAlienSorted = function (words, order) {
+        let map = new Map();
+        for (let i = 0; i < order.length; i++) {
+          map.set(order[i], i);
+        }
+
+        for (let [index, word] of words.entries()) {
+          if (index === words.length - 1) break;
+
+          for (let j = 0; j < word.length; j++) {
+            if (j == words[index + 1].length) return false;
+
+            let charA = word[j];
+            let charB = words[index + 1][j];
+            let a = map.get(charA);
+            let b = map.get(charB);
+            if (a > b) return false;
+            else if (a < b) break;
+          }
+        }
+        return true;
+      };
+      // var a = isAlienSorted(
+      //   ["hello", "leetcode"],
+      //   "hlabcdefgijkmnopqrstuvwxyz"
+      // ); // true
+      // var a = isAlienSorted(
+      //   ["word", "world", "row"],
+      //   "worldabcefghijkmnpqstuvxyz"
+      // ); // false
+      var a = isAlienSorted(["apple", "app"], "abcdefghijklmnopqrstuvwxyz"); // false
+      console.log("res====", a);
+    </script>
+  </body>
+</html>
