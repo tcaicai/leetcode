@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var minMoves2 = function (nums) {
+        let res = 0;
+        nums.sort((a, b) => a - b);
+        let mid = nums.length >> 1;
+
+        for (let num of nums) {
+          res += Math.abs(num - nums[mid]);
+        }
+
+        return res;
+      };
+
+      var res = minMoves2([1]); // 0
+      // var res = minMoves2([1, 2, 3]); // 2
+      // var res = minMoves2([1, 10, 2, 9]); // 16
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

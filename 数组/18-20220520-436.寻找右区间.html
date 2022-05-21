@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function binarySearch(arr, key) {
+        let left = 0;
+        right = arr.length - 1;
+        let index = -1;
+        while (left <= right) {
+          let mid = left + ((right - left) >> 1);
+          if (arr[mid][0] < key) {
+            left++;
+          } else {
+            index = mid;
+            right--;
+          }
+        }
+        return arr[index][1];
+      }
+      var findRightInterval = function (intervals) {
+        let len = intervals.length;
+        let arr = new Array(len).fill();
+
+        for (let i = 0; i < len; i++) {
+          arr[i] = [intervals[i][0], i];
+        }
+
+        arr.sort((a, b) => a[0] - b[0]);
+
+        let res = new Array(len);
+        for (let j = 0; j < len; j++) {
+          let end = intervals[j][1];
+          if (arr[len - 1][0] < end) res[j] = -1;
+          else {
+            let index = binarySearch(arr, end);
+            res[j] = index;
+          }
+        }
+        return res;
+      };
+
+      // var res = findRightInterval([[1, 2]]); // [-1]
+      // var res = findRightInterval([
+      //   [3, 4],
+      //   [2, 3],
+      //   [1, 2],
+      // ]); // [-1,0,1]
+      var res = findRightInterval([
+        [1, 4],
+        [2, 3],
+        [3, 4],
+      ]); // [-1,2,-1]
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

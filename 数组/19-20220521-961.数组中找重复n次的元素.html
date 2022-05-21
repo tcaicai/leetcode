@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var repeatedNTimes = function (nums) {
+        let time = nums.length >> 1;
+        let map = new Map();
+
+        for (let num of nums) {
+          if (map.has(num)) {
+            let value = map.get(num) + 1;
+            if (value === time) return num;
+            map.set(num, value);
+          } else {
+            map.set(num, 1);
+          }
+        }
+      };
+      var res = repeatedNTimes([1, 2, 3, 3]); // 3
+      var res = repeatedNTimes([2, 1, 2, 5, 3, 2]); // 2
+      var res = repeatedNTimes([5, 1, 5, 2, 5, 3, 5, 4]); // 5
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
