@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var fallingSquares = function (positions) {
+        const res = [];
+        const range = [];
+        let max = -Infinity;
+        for (const [pos, width] of positions) {
+          // 查看该箱子落下的地方的最大高度
+          const m = getMax(pos, width);
+          max = Math.max(max, m + width);
+          range.push([pos, pos + width, m + width]);
+          res.push(max);
+        }
+
+        function getMax(s, h) {
+          const e = s + h;
+          let m = 0;
+          for (const [start, end, max] of range) {
+            if (!(e <= start || s >= end)) {
+              m = Math.max(m, max);
+            }
+          }
+          return m;
+        }
+
+        return res;
+      };
+
+      var res = fallingSquares([
+        [1, 2],
+        [2, 3],
+        [6, 1],
+      ]); //[2,5,5]
+      // var res = fallingSquares([
+      //   [100, 100],
+      //   [200, 100],
+      // ]); //[100, 100]
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
