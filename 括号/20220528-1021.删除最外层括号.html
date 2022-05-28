@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var removeOuterParentheses = function (s) {
+        let arr = [];
+        let count = 0;
+        let temp = "";
+        for (let i = 0; i < s.length; i++) {
+          let char = s[i];
+          if (char === "(") {
+            count++;
+            temp += char;
+          } else {
+            count--;
+            temp += char;
+            if (count === 0) {
+              arr.push(temp);
+              temp = "";
+            }
+          }
+        }
+        return arr.map((item) => item.slice(1, -1)).join("");
+      };
+
+      var res = removeOuterParentheses("(()())(())"); // ()()()
+      // var res = removeOuterParentheses("(()())(())(()(())))"); //()()()()(())
+      // var res = removeOuterParentheses("()()"); // ""
+      console.log(res);
+    </script>
+  </body>
+</html>
