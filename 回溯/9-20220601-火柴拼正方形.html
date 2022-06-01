@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>火柴拼正方形</title>
+  </head>
+  <body>
+    <script>
+      var makesquare = function (matchsticks) {
+        let total = matchsticks.reduce((pre, cur) => pre + cur);
+        if (total % 4 !== 0) return false;
+
+        let ave = total / 4;
+        matchsticks.sort((a, b) => b - a);
+        let bucket = new Array(4).fill(0);
+        return backtrack(0, matchsticks, ave, bucket);
+      };
+      function backtrack(index, matchsticks, edge, bucket) {
+        if (index === matchsticks.length) return true;
+
+        for (let i = 0; i < 4; i++) {
+          if (bucket[i] + matchsticks[index] > edge) continue;
+          bucket[i] += matchsticks[index];
+          if (backtrack(index + 1, matchsticks, edge, bucket)) return true;
+          bucket[i] -= matchsticks[index];
+        }
+
+        return false;
+      }
+      var res = makesquare([5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3]); // true
+      // var res = makesquare([1, 1, 2, 2, 2]); // true
+      // var res = makesquare([3, 3, 3, 3, 4]); // false
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

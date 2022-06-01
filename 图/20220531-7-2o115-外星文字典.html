@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var alienOrder = function (words) {
+        let res = [];
+        let len = words.length;
+        for (let i = 0; i < len - 1; i++) {
+          let word1 = words[i];
+          let word2 = words[i + 1];
+          let minLen = Math.min(word1.length, word2.length);
+
+          for (let j = 0; j < minLen; j++) {
+            let char1 = word1[j];
+            let char2 = word2[j];
+            if (char1 !== char2) {
+              let char1Index = res.indexOf(char1);
+              let char2Index = res.indexOf(char2);
+              if (char2Index < char1Index) return "";
+
+              if (char1Index === -1 && char2Index === -1) {
+                res.push(char1, char2);
+              } else if (char1Index === -1) {
+                res.splice(char2Index, 1, char1, char2);
+              } else if (char2Index === -1) {
+                res.splice(char1Index, 1, char1, char2);
+              }
+
+              break;
+            }
+          }
+        }
+        return res.join("");
+      };
+      var res = alienOrder(["wrt", "wrf", "er", "ett", "rftt"]); // "wertf"
+      // var res = alienOrder(["z", "x"]); // zx
+      // var res = alienOrder(["z", "x", "z"]); // ""
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
