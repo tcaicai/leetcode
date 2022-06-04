@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var numUniqueEmails = function (emails) {
+        let res = new Set();
+
+        for (let email of emails) {
+          let [local, host] = email.split("@");
+          let plusIndex = local.indexOf("+");
+          let pre = local;
+          if (plusIndex > -1) {
+            pre = local.slice(0, plusIndex);
+          }
+
+          let realEmail = pre.replace(/\./g, "") + "@" + host;
+          res.add(realEmail);
+          // if (!res.includes(realEmail)) res.push(realEmail);
+        }
+        return res.size;
+      };
+      var res = numUniqueEmails([
+        "test.email+alex@leetcode.com",
+        "test.email@leetcode.com",
+      ]); //1
+      var res = numUniqueEmails([
+        "test.email+alex@leetcode.com",
+        "test.e.mail+bob.cathy@leetcode.com",
+        "testemail+david@lee.tcode.com",
+      ]); // 2
+      var res = numUniqueEmails([
+        "a@leetcode.com",
+        "b@leetcode.com",
+        "c@leetcode.com",
+      ]); // 3
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
