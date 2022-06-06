@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var MyCalendarTwo = function () {
+        this.map = {};
+        this.list = [];
+      };
+
+      MyCalendarTwo.prototype.book = function (start, end) {
+        const insert = (v) => {
+          if (this.list.includes(v)) return;
+          const i = this.list.findIndex((i) => i > v);
+          if (i < 0) {
+            this.list.push(v);
+          } else {
+            this.list.splice(i, 0, v);
+          }
+        };
+
+        let cur = 0;
+        this.map[start] = (this.map[start] || 0) + 1;
+        this.map[end] = (this.map[end] || 0) - 1;
+        insert(start);
+        insert(end);
+        for (const i of this.list) {
+          cur += this.map[i] || 0;
+          if (cur >= 3) {
+            this.map[start] = (this.map[start] || 0) - 1;
+            this.map[end] = (this.map[end] || 0) + 1;
+            return false;
+          }
+        }
+
+        return true;
+      };
+
+      let MyCalendar = new MyCalendarTwo();
+      console.log(MyCalendar.book(10, 20)); // returns true
+      console.log(MyCalendar.book(50, 60)); // returns true
+      console.log(MyCalendar.book(10, 40)); // returns true
+      console.log(MyCalendar.book(5, 15)); // returns false
+      console.log(MyCalendar.book(5, 10)); // returns true
+      console.log(MyCalendar.book(25, 55)); // returns true
+    </script>
+  </body>
+</html>

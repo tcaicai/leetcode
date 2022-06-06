@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 判断当前[start, end)是否包含其他数组
+       */
+      var MyCalendar = function () {
+        this.arr = [];
+      };
+
+      MyCalendar.prototype.book = function (start, end) {
+        let curLen = this.arr.length;
+
+        if (curLen === 0) {
+          this.arr.push([start, end]);
+          return true;
+        }
+
+        let isValid = true;
+        for (let [s, e] of this.arr) {
+          if (end <= s || start >= e) {
+            isValid = true;
+          } else {
+            isValid = false;
+            break;
+          }
+        }
+        if (isValid) {
+          this.arr.push([start, end]);
+        }
+
+        return isValid;
+      };
+
+      // let myCalendar = new MyCalendar();
+      // console.log(myCalendar.book(10, 20)); // return True
+      // console.log(myCalendar.book(15, 25)); // return False ，这个日程安排不能添加到日历中，因为时间 15 已经被另一个日程安排预订了。
+      // console.log(myCalendar.book(20, 30)); // return True ，这个日程安排可以添加到日历中，因为第一个日程安排预订的每个时间都小于 20 ，且不包含时间 20 。
+
+      // let c = new MyCalendar();
+      // console.log(c.book(47, 50));
+      // console.log(c.book(33, 41));
+      // console.log(c.book(39, 45));
+      // console.log(c.book(33, 42));
+      // console.log(c.book(25, 32));
+      // console.log(c.book(26, 35));
+      // console.log(c.book(19, 25));
+      // console.log(c.book(3, 8));
+      // console.log(c.book(8, 13));
+      // console.log(c.book(18, 27));
+      // [true, true, false, false, true, false, true, true, true, false];
+
+      // let c = new MyCalendar();
+      // console.log(c.book(37, 50));
+      // console.log(c.book(33, 50));
+      // console.log(c.book(4, 17));
+      // console.log(c.book(35, 48));
+      // console.log(c.book(8, 250));
+      // [true,false,true,false,false]
+    </script>
+  </body>
+</html>
