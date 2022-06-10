@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /** 哈希表法 */
+      var twoSum1 = function (numbers, target) {
+        let map = new Map();
+        for (let i = 0; i < numbers.length; i++) {
+          let num = numbers[i];
+          if (map.has(num)) return [map.get(num), i];
+
+          map.set(target - num, i);
+        }
+      };
+      /** 双指针 */
+      var twoSum = function (numbers, target) {
+        let left = 0,
+          right = numbers.length - 1;
+        while (left < right) {
+          let count = numbers[left] + numbers[right];
+          if (count === target) return [left, right];
+          else if (count < target) left++;
+          else right--;
+        }
+      };
+      //   var res = twoSum([1, 2, 4, 6, 10], 8); // [1,3]
+      //   var res = twoSum([2, 3, 4], 6); // [0,2]
+      var res = twoSum([-1, 0], -1); // [0,1]
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
