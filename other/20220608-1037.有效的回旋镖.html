@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isBoomerang = function (points) {
+        let diffX1 = points[1][0] - points[0][0];
+        let diffY1 = points[1][1] - points[0][1];
+
+        let diffX2 = points[2][0] - points[1][0];
+        let diffY2 = points[2][1] - points[1][1];
+
+        return diffY1 * diffX2 - diffX1 * diffY2 !== 0;
+
+        // const v1 = [points[1][0] - points[0][0], points[1][1] - points[0][1]];
+        // const v2 = [points[2][0] - points[0][0], points[2][1] - points[0][1]];
+        // return v1[0] * v2[1] - v1[1] * v2[0] != 0;
+      };
+      // var res = isBoomerang([
+      //   [92, 72],
+      //   [12, 40],
+      //   [27, 46],
+      // ]); //false
+
+      // var res = isBoomerang([
+      //   [0, 1],
+      //   [1, 1],
+      //   [2, 1],
+      // ]); // false
+      var res = isBoomerang([
+        [1, 1],
+        [2, 3],
+        [3, 2],
+      ]); // true
+      var res = isBoomerang([
+        [1, 1],
+        [2, 2],
+        [3, 3],
+      ]); // false
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

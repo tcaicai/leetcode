@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var countBits1 = function (n) {
+        const getCount = (n) => {
+          let count = 0;
+          while (n > 0) {
+            n = n & (n - 1);
+            count++;
+          }
+          return count;
+        };
+        let res = [];
+        for (let i = 0; i <= n; i++) {
+          res[i] = getCount(i);
+        }
+        return res;
+      };
+      var countBits = function (n) {
+        const bits = new Array(n + 1).fill(0);
+        let highBit = 0;
+        for (let i = 1; i <= n; i++) {
+          if ((i & (i - 1)) == 0) {
+            highBit = i;
+          }
+          bits[i] = bits[i - highBit] + 1;
+        }
+        return bits;
+      };
+
+      // var res = countBits(2); // [0,1,1]
+      var res = countBits(5); // [0,1,1,2,1,2]
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

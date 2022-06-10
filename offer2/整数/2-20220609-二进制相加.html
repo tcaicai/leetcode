@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var addBinary1 = function (a, b) {
+        let aLen = a.length,
+          bLen = b.length;
+        if (aLen > bLen) b = b.padStart(aLen, "0");
+        if (bLen > aLen) a = a.padStart(bLen, "0");
+
+        let carry = 0;
+        let res = "";
+        for (let i = a.length - 1; i >= 0; i--) {
+          let sum = carry + parseInt(a[i]) + parseInt(b[i]);
+          if (sum % 2 === 0) {
+            res = "0" + res;
+          } else {
+            res = "1" + res;
+          }
+          carry = sum >= 2 ? 1 : 0;
+        }
+        return carry === 1 ? "1" + res : res;
+      };
+
+      var res = addBinary("11", "10"); // 101
+      var res = addBinary("1010", "1011"); // 10101
+      var res = addBinary("1", "111"); // 1000
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

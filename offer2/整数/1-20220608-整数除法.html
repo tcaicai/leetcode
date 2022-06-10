@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {number} dividend
+       * @param {number} divisor
+       * @return {number}
+       */
+      const MAX = Math.pow(2, 31) - 1,
+        MIN = -Math.pow(2, 31);
+      //   var divide = function (dividend, divisor) {
+      //     if (dividend == MIN && divisor == -1) return MAX;
+
+      //     let a = Math.abs(dividend),
+      //       b = Math.abs(divisor),
+      //       res = 0;
+      //     for (let i = 31; i >= 0; i--) {
+      //       if (a >>> i >= b) {
+      //         // 1<<31 = -2147483648，需特殊处理
+      //         if (i == 31) {
+      //           a -= MAX;
+      //           a -= 1;
+      //           res -= MIN;
+      //         } else {
+      //           a -= b << i;
+      //           res += 1 << i;
+      //         }
+      //       }
+      //     }
+      //     return dividend > 0 == divisor > 0 ? res : -res;
+      //   };
+      //   var res = divide(1, -2147483648); // 0
+
+      var divide = function (dividend, divisor) {
+        if (dividend === MIN && divisor === -1) return MAX;
+
+        const divideCore = (dividend, divisor) => {
+          let result = 0;
+          while (dividend <= divisor) {
+            let value = divisor;
+            let quatient = 1;
+            while (
+              // 最小的整数是-2的31次方，而最大的整数是2的31次方减1
+              value >= -Math.pow(2, 30) &&
+              dividend <= value + value
+            ) {
+              // 当被除数大于除数时，继续判断被除数是否大于除数的2倍
+              // 如果是，则继续判断被除数是否大于除数的4倍、8倍、16倍等
+              quatient += quatient;
+              value += value;
+              // 这里以a为15，b为2举例，
+              // quatient为1+1=2，value=2+2=4;quatient为2+2=4，value=4+4=8;quatient为4+4=8，value=8+8=16;
+            }
+            result += quatient;
+            dividend -= value;
+          }
+          return result;
+        };
+
+        if (dividend > 0) {
+          dividend = -dividend;
+        }
+        if (divisor > 0) {
+          divisor = -divisor;
+        }
+
+        let result = divideCore(dividend, divisor);
+        return (dividend ^ divisor) < 0 ? -result : result;
+      };
+
+      var res = divide(1, MIN); // 0
+      var res = divide(19, 3); // 6
+      var res = divide(7, -3); // -2
+      var res = divide(0, 1); // 0
+      //   var res = divide(1, 1); // 1
+      console.log(res);
+    </script>
+  </body>
+</html>

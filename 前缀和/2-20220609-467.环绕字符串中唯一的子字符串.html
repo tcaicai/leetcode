@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const s = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+      var findSubstringInWraproundString = function (p) {
+        let prefixSumArr = new Array(26).fill(0);
+        let base = "a".charCodeAt();
+
+        prefixSumArr[p[0].charCodeAt() - base] = 1;
+
+        let k = 1;
+        for (let i = 1; i < p.length; i++) {
+          if ((p[i].charCodeAt() - p[i - 1].charCodeAt() + 26) % 26 === 1) {
+            ++k;
+          } else {
+            k = 1;
+          }
+          let index = p[i].charCodeAt() - base;
+          if (k > prefixSumArr[index]) prefixSumArr[index] = k;
+        }
+
+        return prefixSumArr.reduce((pre, cur) => pre + cur);
+      };
+      // var res = findSubstringInWraproundString("a"); // 1
+      // var res = findSubstringInWraproundString("cac"); // 2
+      // var res = findSubstringInWraproundString("zab"); // 6
+      var res = findSubstringInWraproundString("zaba"); // 6
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

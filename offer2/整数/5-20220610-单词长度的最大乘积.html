@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var maxProduct = function (words) {
+        let res = 0,
+          base = "a".charCodeAt();
+        len = words.length;
+        let arr = new Array(len).fill(0);
+
+        for (let i = 0; i < len; i++) {
+          let word = words[i];
+          for (let char of word) {
+            arr[i] |= 1 << (char.charCodeAt() - base);
+          }
+        }
+
+        for (let j = 0; j < len - 1; j++) {
+          for (let k = j + 1; k < len; k++) {
+            if ((arr[j] & arr[k]) === 0) {
+              let max = words[j].length * words[k].length;
+              if (max > res) res = max;
+            }
+          }
+        }
+        return res;
+      };
+      //   var res = maxProduct(["abcw", "baz", "foo", "bar", "fxyz", "abcdef"]); // 16
+      //   var res = maxProduct(["a", "ab", "abc", "d", "cd", "bcd", "abcd"]); // 4
+      var res = maxProduct(["b", "bb", "bbb", "bbbb"]); // 0
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

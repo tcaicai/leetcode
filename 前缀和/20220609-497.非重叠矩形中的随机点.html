@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var Solution = function (rects) {
+        const [[x11, y11, x12, y12], [x21, y21, x22, y22]] = ([
+          this.s1,
+          this.s2,
+        ] = rects);
+        this.left = Math.min(x11, x21);
+        this.right = Math.max(x12, x22);
+        this.bottom = Math.min(y11, y21);
+        this.top = Math.max(y12, y22);
+      };
+
+      Solution.prototype.pick = function () {
+        const [x11, y11, x12, y12] = this.s1;
+        const [x21, y21, x22, y22] = this.s2;
+        while (true) {
+          let x =
+            Math.ceil(Math.random() * (this.right - this.left)) + this.left;
+          let y =
+            Math.ceil(Math.random() * (this.top - this.bottom)) + this.bottom;
+          if (
+            (x >= x11 && x <= x12 && y >= y11 && y <= y12) ||
+            (x >= x21 && x <= x22 && y >= y21 && y <= y22)
+          )
+            return [x, y];
+        }
+      };
+
+      let solution = new Solution([
+        [-2, -2, 1, 1],
+        [2, 2, 4, 6],
+      ]);
+
+      // let solution1 = new Solution([[1, 1, 5, 5]]);
+
+      console.log(solution.pick()); // 返回 [1, -2]
+      console.log(solution.pick()); // 返回 [1, -1]
+      console.log(solution.pick()); // 返回 [-1, -2]
+      console.log(solution.pick()); // 返回 [-2, -2]
+      console.log(solution.pick()); // 返回 [0, 0]
+    </script>
+  </body>
+</html>

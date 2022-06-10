@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var corpFlightBookings = function (bookings, n) {
+        const nums = new Array(n).fill(0);
+        for (const [start, end, count] of bookings) {
+          nums[start - 1] += count;
+          if (end < n) {
+            nums[end] -= count;
+          }
+        }
+        for (let i = 1; i < n; i++) {
+          nums[i] += nums[i - 1];
+        }
+        return nums;
+      };
+      var res = corpFlightBookings(
+        [
+          [1, 2, 10],
+          [2, 3, 20],
+          [2, 5, 25],
+        ],
+        5
+      ); // [10,55,45,25,25]
+      // var res = corpFlightBookings(
+      //   [
+      //     [1, 2, 10],
+      //     [2, 2, 15],
+      //   ],
+      //   2
+      // ); // [10,25]
+      console.log(res);
+    </script>
+  </body>
+</html>

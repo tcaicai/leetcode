@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var plusOne = function (digits) {
+        let len = digits.length - 1;
+        let res = [];
+
+        let plus = 1;
+        for (let i = len; i >= 0 || plus; i--) {
+          let num = digits[i] ? digits[i] : 0;
+          if (plus) {
+            let count = num + plus;
+            plus = count >= 10 ? 1 : 0;
+            num = count % 10;
+          }
+
+          res.push(num);
+        }
+        return res.reverse();
+      };
+      // var res = plusOne([1, 2, 3]); // [1,2,4]
+      // var res = plusOne([4, 3, 2, 1]); // [4,3,2,2]
+      // var res = plusOne([0]); // [1]
+      var res = plusOne([9]); //[(1, 0)];
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

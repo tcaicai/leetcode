@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var addToArrayForm = function (num, k) {
+        let num2 = [...("" + k)];
+
+        let len1 = num.length - 1;
+        len2 = num2.length - 1;
+        let carry = 0;
+        let res = [];
+        while (len1 >= 0 || len2 >= 0) {
+          let n1 = num[len1] ? num[len1] : 0;
+          let n2 = num2[len2] ? num2[len2] - 0 : 0;
+          let count = n1 + n2 + carry;
+          res.push(count % 10);
+          carry = count / 10 >= 1 ? 1 : 0;
+          len1--;
+          len2--;
+        }
+        if (carry) res.push(carry);
+        return res.reverse();
+
+        // const res = [];
+        // const n = num.length;
+        // for (let i = n - 1; i >= 0 || k > 0; --i, k = Math.floor(k / 10)) {
+        //   if (i >= 0) {
+        //     k += num[i];
+        //   }
+        //   res.unshift(k % 10);
+        // }
+        // return res;
+      };
+      // var res = addToArrayForm([1, 2, 0, 0], 34); // 1234
+      // var res = addToArrayForm([2, 7, 4], 181); // 455
+      var res = addToArrayForm([2, 1, 5], 806); // 1021
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

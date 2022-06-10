@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var addStrings = function (num1, num2) {
+        let len1 = num1.length - 1,
+          len2 = num2.length - 1;
+
+        let carry = 0,
+          res = "";
+        for (; len1 >= 0 || len2 >= 0; len1--, len2--) {
+          let n1 = len1 >= 0 ? num1[len1] - 0 : 0;
+          let n2 = len2 >= 0 ? num2[len2] - 0 : 0;
+
+          let count = n1 + n2 + carry;
+          res = (count % 10) + res;
+          carry = count >= 10 ? 1 : 0;
+        }
+        if (carry) res = carry + res;
+        return res;
+      };
+      var res = addStrings("1", "9"); // "10"
+      // var res = addStrings("11", "123"); // "134"
+      // var res = addStrings("456", "77"); // "533"
+      // var res = addStrings("0", "0"); // "0"
+
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
