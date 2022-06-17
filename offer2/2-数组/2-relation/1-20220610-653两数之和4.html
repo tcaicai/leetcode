@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+      let head = new TreeNode(5);
+      let t1 = new TreeNode(3);
+      let t2 = new TreeNode(6);
+      let t3 = new TreeNode(2);
+      let t4 = new TreeNode(4);
+      let t5 = new TreeNode(7);
+
+      head.left = t1;
+      head.right = t2;
+
+      t1.left = t3;
+      t1.right = t4;
+      t2.right = t5;
+      var findTarget = function (root, k) {
+        const set = new Set();
+        const dfs = (node, k) => {
+          if (node === null) return false;
+          if (set.has(k - node.val)) return true;
+          set.add(node.val);
+          return dfs(node.left, k) || dfs(node.right, k);
+        };
+
+        return dfs(root, k);
+      };
+      //   var res = findTarget(head, 9); // true
+      var res = findTarget(head, 28); // false;
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

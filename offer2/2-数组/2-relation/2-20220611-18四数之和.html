@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var fourSum = function (nums, target) {
+        let len = nums.length,
+          res = [];
+        nums.sort((a, b) => a - b);
+        for (let i = 0; i < len; i++) {
+          let num = nums[i];
+          if (i > 0 && nums[i] === nums[i - 1]) continue;
+          let otherThree = threeSum(nums, target - num, i + 1);
+          if (otherThree.length > 0) {
+            for (let item of otherThree) {
+              item.push(num);
+              res.push(item);
+            }
+          }
+        }
+        return res;
+      };
+      var threeSum = function (nums, target, start) {
+        let res = [];
+        for (let i = start; i < nums.length; i++) {
+          if (i > start && nums[i] === nums[i - 1]) continue;
+          let num = nums[i];
+          let otherTwo = twoSum(nums, target - num, i + 1);
+          if (otherTwo.length > 0) {
+            for (let item of otherTwo) {
+              item.push(num);
+              res.push(item);
+            }
+          }
+        }
+        return res;
+      };
+      var twoSum = function (nums, target, start) {
+        let res = [];
+        let left = start,
+          right = nums.length - 1;
+
+        while (left < right) {
+          let mid = left + ((right - left) >> 1);
+          let sum = nums[left] + nums[right];
+          if (sum === target) {
+            res.push([nums[left], nums[right]]);
+            while (left < right && nums[left] === nums[++left]);
+            while (left < right && nums[right] === nums[--right]);
+          } else if (sum < target) {
+            left++;
+          } else {
+            right--;
+          }
+        }
+        return res;
+      };
+      // var res = fourSum([1, 0, -1, 0, -2, 2], 0); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+      // var res = fourSum([2, 2, 2, 2, 2], 8); // [[2,2,2,2]]
+      // var res = fourSum([-3, -2, -1, 0, 0, 1, 2, 3], 0);
+      var res = fourSum([-1, 0, -5, -2, -2, -4, 0, 1, -2], -9);
+      console.log("res===", res);
+    </script>
+  </body>
+</html>

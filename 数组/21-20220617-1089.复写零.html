@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var duplicateZeros1 = function (arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+          let num = arr[i];
+          if (num === 0) {
+            arr.pop();
+            arr.splice(i, 0, 0);
+            i++;
+          }
+        }
+        console.log("arr===", arr);
+      };
+      var duplicateZeros = function (arr) {
+        const n = arr.length;
+        let top = 0;
+        let i = -1;
+        while (top < n) {
+          i++;
+          if (arr[i] !== 0) {
+            top++;
+          } else {
+            top += 2;
+          }
+        }
+        let j = n - 1;
+        if (top === n + 1) {
+          arr[j] = 0;
+          j--;
+          i--;
+        }
+        while (j >= 0) {
+          arr[j] = arr[i];
+          j--;
+          if (arr[i] === 0) {
+            arr[j] = arr[i];
+            j--;
+          }
+          i--;
+        }
+      };
+
+      var res = duplicateZeros([1, 0, 2, 3, 0, 4, 5, 0]); // [1,0,0,2,3,0,0,4]
+      var res = duplicateZeros([1, 2, 3]); // [1,2,3]
+    </script>
+  </body>
+</html>
