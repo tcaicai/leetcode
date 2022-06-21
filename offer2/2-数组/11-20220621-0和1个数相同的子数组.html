@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /** 前缀和
+       *  -1 -2 -1 -2 -3 -4 -3 -2
+       *  [0, 0, 1, 0, 0, 0, 1, 1]); // 6
+       * 存在sums[0, j] == sum[0, i] j-i即子序列为0的区间
+       * 默认0->-1 即[0,1]区间是0 上一个符合0的区间是index = -1
+       *
+       * 同525
+       */
+      var findMaxLength = function (nums) {
+        let map = new Map(),
+          prefixSum = 0,
+          res = 0;
+
+        map.set(0, -1);
+
+        for (let i = 0; i < nums.length; ++i) {
+          prefixSum += nums[i] == 0 ? -1 : 1;
+          if (map.has(prefixSum)) {
+            res = Math.max(res, i - map.get(prefixSum));
+          } else {
+            map.set(prefixSum, i);
+          }
+        }
+        return res;
+      };
+
+      //   var res = findMaxLength([0, 1, 0]); // 2
+      var res = findMaxLength([0, 1]); // 2
+      //   var res = findMaxLength([0, 1, 1]); // 2
+      //   var res = findMaxLength([0, 0, 1, 0, 0, 0, 1, 1]); // 6
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
