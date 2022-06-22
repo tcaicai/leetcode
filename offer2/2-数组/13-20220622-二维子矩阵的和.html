@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 同304
+       */
+      var NumMatrix = function (matrix) {
+        let rowLen = matrix.length,
+          columnLen = matrix[0].length;
+        let arr = new Array(rowLen + 1)
+          .fill()
+          .map((item) => new Array(columnLen + 1).fill(0));
+        for (let i = 0; i < matrix.length; ++i) {
+          let rowSum = 0;
+          for (let j = 0; j < matrix[0].length; ++j) {
+            rowSum += matrix[i][j];
+            let pre = arr[i][j + 1];
+            arr[i + 1][j + 1] = pre + rowSum;
+          }
+        }
+        this.prefixArr = arr;
+      };
+
+      NumMatrix.prototype.sumRegion = function (row1, col1, row2, col2) {
+        return (
+          this.prefixArr[row2 + 1][col2 + 1] -
+          this.prefixArr[row1][col2 + 1] -
+          this.prefixArr[row2 + 1][col1] +
+          this.prefixArr[row1][col1]
+        );
+      };
+      let numMatrix = new NumMatrix([
+        [3, 0, 1, 4, 2],
+        [5, 6, 3, 2, 1],
+        [1, 2, 0, 1, 5],
+        [4, 1, 0, 1, 7],
+        [1, 0, 3, 0, 5],
+      ]);
+      var res1 = numMatrix.sumRegion(2, 1, 4, 3); // return 8 (红色矩形框的元素总和)
+      var res2 = numMatrix.sumRegion(1, 1, 2, 2); // return 11 (绿色矩形框的元素总和)
+      var res3 = numMatrix.sumRegion(1, 2, 2, 4); // return 12 (蓝色矩形框的元素总和)
+
+      console.log("res===", res1, res2, res3);
+    </script>
+  </body>
+</html>
