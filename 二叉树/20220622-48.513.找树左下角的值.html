@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单值二叉树</title>
+  </head>
+  <body>
+    <script>
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+
+      var findBottomLeftValue = function (root) {
+        let queue = [root],
+          res = [];
+
+        while (queue.length) {
+          let arr = [],
+            len = queue.length;
+          for (let i = 0; i < len; i++) {
+            let node = queue.shift();
+            arr.push(node.val);
+
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+          }
+          res.push(arr);
+        }
+        return res[res.length - 1][0];
+      };
+      var t1_1 = new TreeNode(1);
+      var t2_1 = new TreeNode(2);
+      var t2_2 = new TreeNode(3);
+
+      // var t3_1 = new TreeNode(4);
+      // var t3_2 = new TreeNode(5);
+      // var t3_3 = new TreeNode(6);
+
+      // var t4_1 = new TreeNode(7);
+
+      // t1_1.left = t2_1;
+      t1_1.right = t2_2;
+
+      // t2_1.left = t3_1;
+
+      // t2_2.left = t3_2;
+      // t2_2.right = t3_3;
+
+      // t3_2.left = t4_1;
+
+      var res = findBottomLeftValue(t1_1); // 7
+      console.log("res===", res);
+    </script>
+  </body>
+</html>
